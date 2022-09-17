@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.android.homely">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,9 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Homely"
         tools:targetApi="31">
-        <activity
-            android:name=".NoInternetActivity"
-            android:exported="false" />
         <activity
             android:name=".UserActivity"
             android:exported="false" />
