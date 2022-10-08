@@ -12,9 +12,12 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
 
     public static int SPLASH_TIMER = 2000;
+    private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,13 +25,16 @@ public class MainActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent1 = new Intent(MainActivity.this, MainActivity2.class);
+        auth = FirebaseAuth.getInstance();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        new Handler().postDelayed(() -> {
+            if(auth.getCurrentUser()==null){
                 startActivity(intent);
-                finish();
+            }else {
+                startActivity(intent1);
             }
+            finish();
         }, SPLASH_TIMER);
 
 
