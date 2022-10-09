@@ -3,9 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_baseline_favorite_border_24_1.xml" value="0.2535" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_component6.xml" value="0.2555" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2555" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_outline_account_circle_24.xml" value="0.2535" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_outline_account_circle_24_1.xml" value="0.2535" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_outline_calendar_month_24.xml" value="0.2535" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_outline_home_24.xml" value="0.2555" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_outline_lock_reset_24_1.xml" value="0.2535" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_outline_remove_red_eye_24.xml" value="0.2535" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_undraw_pic_profile_re_1865.xml" value="0.2535" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/round_border.xml" value="0.2545" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_login.xml" value="0.4" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_main.xml" value="0.264" />
@@ -21,7 +28,7 @@
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_my_home.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_notification.xml" value="0.15172413793103448" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_notifications.xml" value="0.12158054711246201" />
-        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_search.xml" value="0.2359375" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/menu/menu_items.xml" value="0.25" />

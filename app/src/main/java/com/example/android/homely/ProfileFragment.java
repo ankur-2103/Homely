@@ -43,7 +43,7 @@ public class ProfileFragment extends Fragment {
         user = auth.getCurrentUser();
 
         if(user != null){
-            name.setText("Hello " + user.getDisplayName());
+            name.setText(user.getDisplayName());
             email.setText(user.getEmail());
         }else{
             Toast.makeText(getActivity(), "Signed Out", Toast.LENGTH_SHORT).show();
