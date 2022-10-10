@@ -34,12 +34,21 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.submit_button);
 
         Intent signupIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+        Intent forgotPassword = new Intent(LoginActivity.this, ForgetPassword.class);
         TextView register = findViewById(R.id.signup);
+        TextView fpass = findViewById(R.id.forgotpassword);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(signupIntent);
+            }
+        });
+
+        fpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(forgotPassword);
             }
         });
 
