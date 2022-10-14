@@ -54,4 +54,14 @@ public class MainActivity2 extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        if(binding.bottomNavigationView.getSelectedItemId()==R.id.home){
+            super.onBackPressed();
+            finish();
+        }else{
+            binding.bottomNavigationView.setSelectedItemId(R.id.home);
+        }
+    }
 }
