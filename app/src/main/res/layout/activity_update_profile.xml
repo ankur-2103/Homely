@@ -97,7 +97,29 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textlayout2"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="24dp"
+        android:hint="Email"
+        app:layout_constraintTop_toBottomOf="@+id/textlayout1"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="34dp">
 
+        <EditText
+            android:id="@+id/Nemail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="phone"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="3dp"
+            tools:layout_editor_absoluteY="124dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textlayout3"
@@ -108,7 +130,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="24dp"
         android:hint="Phone Number"
-        app:layout_constraintTop_toBottomOf="@+id/textlayout1"
+        app:layout_constraintTop_toBottomOf="@+id/textlayout2"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="34dp">
 

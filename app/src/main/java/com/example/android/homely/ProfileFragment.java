@@ -51,8 +51,8 @@ public class ProfileFragment extends Fragment {
     private FirebaseStorage storage;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
-    private Intent updateProfile;
-    private ConstraintLayout uprofile;
+    private Intent updateProfile, changePassword;
+    private ConstraintLayout uprofile, changepassword;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -69,6 +69,7 @@ public class ProfileFragment extends Fragment {
         email = view.findViewById(R.id.email);
         signout = view.findViewById(R.id.signout_button);
         uprofile = view.findViewById(R.id.updateProfile);
+        changepassword = view.findViewById(R.id.changePassword);
         auth = FirebaseAuth.getInstance();
 
         user = auth.getCurrentUser();
@@ -117,6 +118,14 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 updateProfile = new Intent(getContext(), UpdateProfile.class);
                 startActivity(updateProfile);
+            }
+        });
+
+        changepassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changePassword = new Intent(getContext(), ChangePassword.class);
+                startActivity(changePassword);
             }
         });
 

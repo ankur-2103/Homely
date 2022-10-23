@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +16,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -33,8 +36,7 @@ import com.squareup.picasso.Picasso;
 public class UpdateProfile extends AppCompatActivity {
 
     private ImageView imageView;
-    private EditText Nfname;
-    private EditText Nphone;
+    private EditText Nfname, Nphone, Nemail;
     private Button save;
     private Uri filePath;
     private Uri ProfileUri;
@@ -45,7 +47,8 @@ public class UpdateProfile extends AppCompatActivity {
     private FirebaseStorage storage;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
-    private String full_name, phone_no;
+    private String full_name, phone_no, e_mail;
+    private boolean success = true;
     private ProgressBar progressBar;
 
     @Override
@@ -55,6 +58,7 @@ public class UpdateProfile extends AppCompatActivity {
 
         Nfname = findViewById(R.id.Nfname);
         Nphone = findViewById(R.id.Nphone);
+        Nemail = findViewById(R.id.Nemail);
         imageView = findViewById(R.id.img);
         save = findViewById(R.id.save_button);
         progressBar = findViewById(R.id.progressBar);
@@ -79,8 +83,10 @@ public class UpdateProfile extends AppCompatActivity {
                 try {
                     full_name = snapshot.child("fname").getValue().toString();
                     phone_no = snapshot.child("phone").getValue().toString();
+                    e_mail = snapshot.child("email").getValue().toString();
                     Nfname.setText(full_name);
                     Nphone.setText(phone_no);
+                    Nemail.setText(e_mail);
                 }catch (Exception e){
                     Log.e("DBError", String.valueOf(e));
                 }
@@ -104,6 +110,7 @@ public class UpdateProfile extends AppCompatActivity {
             public void onClick(View view) {
                 String fullname = Nfname.getText().toString();
                 String phone_number = Nphone.getText().toString();
+                String email = Nemail.getText().toString();
 
                 if(TextUtils.isEmpty(fullname)){
                     Nfname.setError("Please enter Full Name");
@@ -111,8 +118,15 @@ public class UpdateProfile extends AppCompatActivity {
                 }else if(TextUtils.isEmpty(phone_number)){
                     Nphone.setError("Please enter phone number");
                     Nphone.requestFocus();
+                }else if(TextUtils.isEmpty(e_mail)){
+                    Nemail.setError("Please enter E-mail");
+                    Nemail.requestFocus();
+                }else if(!Patterns.EMAIL_ADDRESS.matcher(e_mail).matches()){
+                    Nemail.setError("Please enter re-enter email");
+                    Nemail.setText(null);
+                    Nemail.requestFocus();
                 }else{
-                    saveChanges(fullname, phone_number);
+                    saveChanges(fullname, phone_number, email);
                 }
             }
         });
@@ -142,22 +156,43 @@ public class UpdateProfile extends AppCompatActivity {
         }
     }
 
-    private void saveChanges(String fullname, String phone_number) {
+    private void saveChanges(String fullname, String phone_number, String email) {
         if(!fullname.equals(full_name)){
             databaseReference.child("fname").setValue(fullname);
         }
         if(!phone_number.equals(phone_no)){
             databaseReference.child("phone").setValue(phone_number);
         }
+        if(!e_mail.equals(email)){
+            databaseReference.child("email").setValue(email);
+            changeEmail(email);
+        }
         if(filePath != null){
             uploadPic();
         }
-        Toast.makeText(this, "Updated Profile!!!", Toast.LENGTH_SHORT).show();
+        if (success){
+            Toast.makeText(this, "Updated Profile!!!", Toast.LENGTH_SHORT).show();
+        }
         finish();
     }
 
-    private void uploadPic() {
+    private void changeEmail(String email) {
+        user.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (!task.isSuccessful()){
+                    success = false;
+                    try {
+                        throw task.getException();
+                    }catch (Exception e){
+                        Toast.makeText(UpdateProfile.this, "Email Update Failed!!!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+    }
 
+    private void uploadPic() {
         storageReference.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -175,6 +210,7 @@ public class UpdateProfile extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                success = false;
                 Toast.makeText(UpdateProfile.this, "Profile Image Upload Failed!!!", Toast.LENGTH_SHORT).show();
             }
         });
