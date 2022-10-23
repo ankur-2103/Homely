@@ -20,6 +20,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -30,6 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private Intent loginIntent;
     private FirebaseUser user;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,9 @@ public class RegisterActivity extends AppCompatActivity {
                     email.setError("Please enter re-enter email");
                     email.setText(null);
                     email.requestFocus();
+                }else if(TextUtils.isEmpty(phone_number)) {
+                    phoneno.setError("Please enter enter phone number");
+                    phoneno.requestFocus();
                 }else if(TextUtils.isEmpty(password)){
                     pass.setError("Please enter password");
                     pass.requestFocus();
@@ -99,6 +106,11 @@ public class RegisterActivity extends AppCompatActivity {
                     UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder().setDisplayName(fullname).build();
                     if(user!=null){
                         user.updateProfile(profile);
+
+                        User user1 = new User(fullname, phone_number, e_mail);
+                        firebaseDatabase = FirebaseDatabase.getInstance();
+                        databaseReference = firebaseDatabase.getReference("User");
+                        databaseReference.child(user.getUid()).setValue(user1);
                     }
                     Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                     loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

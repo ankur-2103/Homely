@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2535" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_baseline_favorite_border_24_1.xml" value="0.2535" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_component6.xml" value="0.2555" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2555" />
@@ -12,7 +13,7 @@
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_outline_home_24.xml" value="0.2555" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_outline_lock_reset_24_1.xml" value="0.2535" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_outline_remove_red_eye_24.xml" value="0.2535" />
-        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_undraw_pic_profile_re_1865.xml" value="0.2535" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/ic_undraw_pic_profile_re_1865.xml" value="0.176" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/round_border.xml" value="0.2545" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_forget_password.xml" value="0.264" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_login.xml" value="0.4" />
@@ -21,6 +22,7 @@
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_main3.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_no_internet.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_register.xml" value="0.264" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_update_profile.xml" value="0.20505344995140914" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_user.xml" value="0.4" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_blank.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
