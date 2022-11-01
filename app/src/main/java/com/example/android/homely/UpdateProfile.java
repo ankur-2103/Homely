@@ -69,7 +69,7 @@ public class UpdateProfile extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("User/"+user.getUid());
+        databaseReference = firebaseDatabase.getReference("UserData/"+user.getUid());
         ProfileUri = user.getPhotoUrl();
 
         if (ProfileUri != null){

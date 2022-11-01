@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="drop_down_list">
+        <item>Residential</item>
+        <item>Commercial</item>
+        <item>Industrial</item>
+        <item>Investing</item>
+    </string-array>
+</resources>

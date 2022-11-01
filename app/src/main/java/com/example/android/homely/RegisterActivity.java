@@ -107,9 +107,9 @@ public class RegisterActivity extends AppCompatActivity {
                     if(user!=null){
                         user.updateProfile(profile);
 
-                        User user1 = new User(fullname, phone_number, e_mail);
+                        UserData user1 = new UserData(fullname, phone_number, e_mail);
                         firebaseDatabase = FirebaseDatabase.getInstance();
-                        databaseReference = firebaseDatabase.getReference("User");
+                        databaseReference = firebaseDatabase.getReference("UserData");
                         databaseReference.child(user.getUid()).setValue(user1);
                     }
                     Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
