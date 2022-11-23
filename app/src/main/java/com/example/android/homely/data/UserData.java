@@ -1,4 +1,4 @@
-package com.example.android.homely;
+package com.example.android.homely.data;
 
 import android.net.Uri;
 

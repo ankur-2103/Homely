@@ -1,4 +1,4 @@
-package com.example.android.homely;
+package com.example.android.homely.MyHome;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,13 +6,19 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.homely.R;
+import com.example.android.homely.data.PropertyData;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,14 +29,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class MyHomeFragment extends Fragment {
 
     private ImageView imageView;
+    private TextView textView;
     private MaterialButton addProperty_button;
+    private RecyclerView recyclerView;
+    private MyPropertyAdapter myPropertyAdapter;
+    private ArrayList<PropertyData>list;
+    private ArrayList<String>propIDList;
+    private ArrayList<String>currPropIDList;
     private FloatingActionButton floating_button;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
     private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference propertyFirebaseDatabase;
     private DatabaseReference databaseReference;
 
     public static MyHomeFragment newInstance(){
@@ -41,26 +56,54 @@ public class MyHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_home, container, false);
 
         imageView = view.findViewById(R.id.noData);
+        textView = view.findViewById(R.id.myHomeTxt);
         floating_button = view.findViewById(R.id.addProperty_fbutton);
+        recyclerView = view.findViewById(R.id.recyclerView);
         addProperty_button = view.findViewById(R.id.addProperty);
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("User/"+user.getUid());
+        databaseReference = firebaseDatabase.getReference("User/"+user.getUid()+"/my_property");
+        propertyFirebaseDatabase = firebaseDatabase.getReference("Property");
         Intent addProperty = new Intent(getContext(), AddProperty.class);
-        DataSnapshot data;
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        list = new ArrayList<>();
+        propIDList = new ArrayList<>();
+        currPropIDList = new ArrayList<>();
+        myPropertyAdapter = new MyPropertyAdapter(getContext(), list, new MyPropertyAdapter.ItemClickListener() {
+            @Override
+            public void onItemClick(PropertyData propertyData, int pos) {
+                Intent property = new Intent(getContext(), PropertyActivity.class);
+                property.putExtra("propertyData", propertyData);
+                property.putExtra("propertyID", currPropIDList.get(pos));
+                startActivity(property);
+            }
+        });
+        recyclerView.setAdapter(myPropertyAdapter);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(!snapshot.child("my_property").exists()){
+                Log.w("DBsnap", "onDataChange: "+snapshot.toString());
+                if(snapshot.getValue()==null){
                     imageView.setVisibility(View.VISIBLE);
                     addProperty_button.setVisibility(View.VISIBLE);
                     floating_button.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
+                    textView.setVisibility(View.GONE);
                 }else{
                     imageView.setVisibility(View.GONE);
                     addProperty_button.setVisibility(View.GONE);
                     floating_button.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    textView.setVisibility(View.VISIBLE);
+                    propIDList.clear();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        propIDList.add(dataSnapshot.getValue().toString());
+                    }
                 }
             }
 
@@ -70,6 +113,27 @@ public class MyHomeFragment extends Fragment {
                 addProperty_button.setVisibility(View.VISIBLE);
                 floating_button.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), error.getCode(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        propertyFirebaseDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                currPropIDList.clear();
+                for(String id : propIDList){
+                    if(!currPropIDList.contains(id)){
+                        PropertyData propertyData = snapshot.child(id).getValue(PropertyData.class);
+                        list.add(propertyData);
+                        currPropIDList.add(id);
+                    }
+                }
+                myPropertyAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 

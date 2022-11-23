@@ -7,6 +7,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import com.example.android.homely.Home.HomeFragment;
+import com.example.android.homely.MyHome.MyHomeFragment;
+import com.example.android.homely.Notification.NotificationsFragment;
+import com.example.android.homely.Profile.ProfileFragment;
 import com.example.android.homely.databinding.ActivityMain2Binding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -23,8 +27,8 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         BottomNavigationView mBottomNavigationView=(BottomNavigationView)findViewById(R.id.bottomNavigationView);
-        mBottomNavigationView.getMenu().findItem(R.id.profile).setChecked(true);
-        replaceFragment(new ProfileFragment());
+        mBottomNavigationView.getMenu().findItem(R.id.myhome).setChecked(true);
+        replaceFragment(new MyHomeFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){

@@ -1,4 +1,4 @@
-package com.example.android.homely;
+package com.example.android.homely.MyHome;
 
 import android.location.Address;
 import android.location.Geocoder;
@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,20 +17,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.android.homely.R;
+import com.example.android.homely.data.PropertyData;
 import com.example.android.homely.interfaces.PassDataInterface;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -47,10 +46,10 @@ public class AddProperty extends AppCompatActivity implements PassDataInterface 
     private FragmentTransaction fragmentTransaction;
     private MaterialButton button_previous, button_next;
     private Fragment currentFragment;
-    private add_property_step1 add_property_step1;
-    private add_property_step2 add_property_step2;
-    private add_property_step3 add_property_step3;
-    private add_property_step4 add_property_step4;
+    private com.example.android.homely.MyHome.add_property_step1 add_property_step1;
+    private com.example.android.homely.MyHome.add_property_step2 add_property_step2;
+    private com.example.android.homely.MyHome.add_property_step3 add_property_step3;
+    private com.example.android.homely.MyHome.add_property_step4 add_property_step4;
     private Geocoder geocoder;
     private List<Address> addressList;
     private FirebaseAuth auth;

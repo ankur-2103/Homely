@@ -1,4 +1,4 @@
-package com.example.android.homely;
+package com.example.android.homely.MyHome;
 
 import android.os.Bundle;
 
@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.android.homely.R;
+import com.example.android.homely.data.PropertyData;
 import com.example.android.homely.interfaces.PassDataInterface;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -16,6 +18,7 @@ public class add_property_step3 extends Fragment {
     private TextInputEditText desc;
     private String description;
     private PassDataInterface passDataInterface;
+    private PropertyData propertyData;
 
     public add_property_step3() {
     }
@@ -32,6 +35,15 @@ public class add_property_step3 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_property_step3, container, false);
 
         desc = view.findViewById(R.id.description);
+
+        try {
+            propertyData = getArguments().getParcelable("propertyData");
+            if (propertyData != null){
+                desc.setText(propertyData.getDescription());
+            }
+        }catch (Exception e){
+
+        }
 
         return view;
     }

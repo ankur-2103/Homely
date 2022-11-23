@@ -1,14 +1,17 @@
-package com.example.android.homely;
+package com.example.android.homely.MyHome;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.android.homely.R;
+import com.example.android.homely.data.PropertyData;
 import com.example.android.homely.interfaces.PassDataInterface;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -19,6 +22,7 @@ public class add_property_step1 extends Fragment {
     private String building_name, street_address, city_name, state, pincode;
     private MaterialButton button;
     private PassDataInterface passDataInterface;
+    private PropertyData propertyData;
 
     public add_property_step1() {
     }
@@ -39,11 +43,26 @@ public class add_property_step1 extends Fragment {
         tstate = view.findViewById(R.id.state);
         tpincode = view.findViewById(R.id.pincode);
 
+        try {
+            propertyData = getArguments().getParcelable("propertyData");
+            Log.d("editProp", String.valueOf(propertyData));
+            if(propertyData!=null){
+                bname.setText(propertyData.getBuilding_name());
+                saddress.setText(propertyData.getStreet_address());
+                cname.setText(propertyData.getCity_name());
+                tstate.setText(propertyData.getState());
+                tpincode.setText(propertyData.getPincode());
+            }else{
+                Log.d("editProp", "no data");
+            }
+        }catch (Exception e){
+            Log.d("editProp", e.toString());
+        }
+
         return view;
     }
 
     public void submitData(){
-//        Toast.makeText(getContext(), "Step 1 Submit Data", Toast.LENGTH_SHORT).show();
         building_name = bname.getText().toString();
         street_address = saddress.getText().toString();
         city_name = cname.getText().toString();

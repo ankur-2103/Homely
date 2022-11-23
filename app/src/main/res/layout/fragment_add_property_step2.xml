@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".add_property_step2">
+    tools:context=".MyHome.add_property_step2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -205,6 +205,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="0"
+                    android:selectAllOnFocus="true"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -241,6 +242,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="0"
+                    android:selectAllOnFocus="true"
                     android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>

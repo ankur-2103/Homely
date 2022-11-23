@@ -14,16 +14,22 @@
         android:theme="@style/Theme.Homely"
         tools:targetApi="31">
         <activity
-            android:name=".AddProperty"
+            android:name=".MyHome.EditProperty"
             android:exported="false" />
         <activity
-            android:name=".ChangePassword"
+            android:name=".MyHome.PropertyActivity"
             android:exported="false" />
         <activity
-            android:name=".UpdateProfile"
+            android:name=".MyHome.AddProperty"
             android:exported="false" />
         <activity
-            android:name=".ForgetPassword"
+            android:name=".Profile.ChangePassword"
+            android:exported="false" />
+        <activity
+            android:name=".Profile.UpdateProfile"
+            android:exported="false" />
+        <activity
+            android:name=".Profile.ForgetPassword"
             android:exported="false" />
         <activity
             android:name=".MainActivity2"

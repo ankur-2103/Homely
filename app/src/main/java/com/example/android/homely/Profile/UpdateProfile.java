@@ -1,4 +1,4 @@
-package com.example.android.homely;
+package com.example.android.homely.Profile;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.android.homely.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -69,7 +70,7 @@ public class UpdateProfile extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("UserData/"+user.getUid());
+        databaseReference = firebaseDatabase.getReference("User/"+user.getUid());
         ProfileUri = user.getPhotoUrl();
 
         if (ProfileUri != null){
@@ -81,6 +82,7 @@ public class UpdateProfile extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 progressBar.setVisibility(View.INVISIBLE);
                 try {
+                    Log.d("DBError", snapshot.toString());
                     full_name = snapshot.child("fname").getValue().toString();
                     phone_no = snapshot.child("phone").getValue().toString();
                     e_mail = snapshot.child("email").getValue().toString();
@@ -118,10 +120,10 @@ public class UpdateProfile extends AppCompatActivity {
                 }else if(TextUtils.isEmpty(phone_number)){
                     Nphone.setError("Please enter phone number");
                     Nphone.requestFocus();
-                }else if(TextUtils.isEmpty(e_mail)){
+                }else if(TextUtils.isEmpty(email)){
                     Nemail.setError("Please enter E-mail");
                     Nemail.requestFocus();
-                }else if(!Patterns.EMAIL_ADDRESS.matcher(e_mail).matches()){
+                }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     Nemail.setError("Please enter re-enter email");
                     Nemail.setText(null);
                     Nemail.requestFocus();

@@ -1,4 +1,4 @@
-package com.example.android.homely;
+package com.example.android.homely.MyHome;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -16,8 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.android.homely.R;
+import com.example.android.homely.data.PropertyData;
 import com.example.android.homely.interfaces.PassDataInterface;
 import com.google.android.material.button.MaterialButton;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -28,6 +31,7 @@ public class add_property_step4 extends Fragment {
     private ImageView imageView;
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 22;
+    private PropertyData propertyData;
 
     public add_property_step4() {
         // Required empty public constructor
@@ -65,6 +69,13 @@ public class add_property_step4 extends Fragment {
             }
         });
 
+        try {
+            propertyData = getArguments().getParcelable("propertyData");
+            Picasso.get().load(propertyData.getFuri()).into(imageView);
+        }catch (Exception e){
+
+        }
+
         return view;
     }
 
@@ -92,7 +103,7 @@ public class add_property_step4 extends Fragment {
     }
 
     public void submitData(){
-        if(filePath == null){
+        if(filePath == null && propertyData == null){
             Toast.makeText(getContext(), "Please Select a Image", Toast.LENGTH_SHORT).show();
         }else{
             passDataInterface.onDataReceivedStep4(filePath);

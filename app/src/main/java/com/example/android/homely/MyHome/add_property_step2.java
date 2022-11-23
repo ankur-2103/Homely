@@ -1,10 +1,11 @@
-package com.example.android.homely;
+package com.example.android.homely.MyHome;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +14,29 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.android.homely.R;
+import com.example.android.homely.data.PropertyData;
 import com.example.android.homely.interfaces.PassDataInterface;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class add_property_step2 extends Fragment  {
 
     private MaterialAutoCompleteTextView autoCompleteTextView;
     private TextInputLayout price1, price2, dropdown;
     private RadioGroup radioGroup;
-    private RadioButton radioButton;
+    private RadioButton radioButton, radioButton1, radioButton2;
     private MaterialButton button;
     private TextInputEditText areaw, areal, ybuilt, bedr, bathr, dep, mrent;
     private String property, property_type, area_width, area_length, year_built, bedroom, bathroom, deposit, monthly_rent;
     private PassDataInterface passDataInterface;
+    private PropertyData propertyData;
 
     public add_property_step2() {
     }
@@ -56,6 +64,8 @@ public class add_property_step2 extends Fragment  {
         dropdown = view.findViewById(R.id.inputLayout);
         radioGroup = view.findViewById(R.id.radioGroup);
         radioButton = view.findViewById(radioGroup.getCheckedRadioButtonId());
+        radioButton1 = view.findViewById(R.id.radio1);
+        radioButton2 = view.findViewById(R.id.radio2);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -72,10 +82,27 @@ public class add_property_step2 extends Fragment  {
             }
         });
 
-        String[] dropdown = getResources().getStringArray(R.array.drop_down_list);
+        List<String> dropdown = new ArrayList<String>();
+        dropdown = Arrays.asList(getResources().getStringArray(R.array.drop_down_list));
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(getContext(), R.layout.drop_down_item, dropdown);
         autoCompleteTextView = view.findViewById(R.id.autoComplete);
         autoCompleteTextView.setAdapter(adapter);
+
+        try {
+            propertyData = getArguments().getParcelable("propertyData");
+            areal.setText(propertyData.getArea_length());
+            areaw.setText(propertyData.getArea_width());
+            ybuilt.setText(propertyData.getYear_built());
+            bedr.setText(propertyData.getBedrooms());
+            bathr.setText(propertyData.getBathrooms());
+            dep.setText(propertyData.getDeposit());
+            mrent.setText(propertyData.getMonthly_rent());
+            if(propertyData.getProperty().equals("Sell")){
+                radioButton2.setChecked(true);
+            }
+        }catch (Exception e){
+            Log.w("propType", e.toString());
+        }
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

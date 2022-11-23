@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
-    tools:context=".add_property_step3">
+    tools:context=".MyHome.add_property_step3">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -51,8 +51,7 @@
                 android:overScrollMode="always"
                 android:scrollbars="vertical"
                 android:scrollbarStyle="insideInset"
-                android:scrollHorizontally="false"
-                android:selectAllOnFocus="true"/>
+                android:scrollHorizontally="false"/>
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
