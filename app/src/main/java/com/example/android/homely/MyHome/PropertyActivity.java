@@ -78,7 +78,7 @@ public class PropertyActivity extends AppCompatActivity {
         String sarea = String.valueOf(farea);
 
         bname.setText(propertyData.getBuilding_name());
-        saddress.setText(propertyData.getStreet_address()+", "+propertyData.getCity_name()+", "+propertyData.getState()+", "+propertyData.getPincode());
+        saddress.setText(propertyData.getFaddress());
         bath.setText(propertyData.getBathrooms()+" Rooms");
         bed.setText(propertyData.getBedrooms()+" Rooms");
         area.setText(sarea+" ft");

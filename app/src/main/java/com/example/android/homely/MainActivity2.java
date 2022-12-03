@@ -11,6 +11,7 @@ import com.example.android.homely.Home.HomeFragment;
 import com.example.android.homely.MyHome.MyHomeFragment;
 import com.example.android.homely.Notification.NotificationsFragment;
 import com.example.android.homely.Profile.ProfileFragment;
+import com.example.android.homely.Search.MapsFragment;
 import com.example.android.homely.databinding.ActivityMain2Binding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -27,8 +28,8 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         BottomNavigationView mBottomNavigationView=(BottomNavigationView)findViewById(R.id.bottomNavigationView);
-        mBottomNavigationView.getMenu().findItem(R.id.myhome).setChecked(true);
-        replaceFragment(new MyHomeFragment());
+        mBottomNavigationView.getMenu().findItem(R.id.search).setChecked(true);
+        replaceFragment(new MapsFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
@@ -36,7 +37,7 @@ public class MainActivity2 extends AppCompatActivity {
                     replaceFragment(new HomeFragment());
                     break;
                 case R.id.search:
-                    replaceFragment(new SearchFragment());
+                    replaceFragment(new MapsFragment());
                     break;
                 case R.id.myhome:
                     replaceFragment(new MyHomeFragment());

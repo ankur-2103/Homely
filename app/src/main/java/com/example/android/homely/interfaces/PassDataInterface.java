@@ -2,6 +2,8 @@ package com.example.android.homely.interfaces;
 
 import android.net.Uri;
 
+import com.example.android.homely.data.FilterData;
+
 public interface PassDataInterface {
     public default void onDataReceivedStep1(String buildingname, String streetaddress, String cityname, String state, String pincode){
     }
@@ -13,5 +15,8 @@ public interface PassDataInterface {
     }
 
     public default void onDataReceivedStep4(Uri uri){
+    }
+
+    public default void onDataReceivedFilterBox(FilterData filterData){
     }
 }

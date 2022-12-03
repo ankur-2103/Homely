@@ -58,7 +58,7 @@ public class EditProperty extends AppCompatActivity implements PassDataInterface
     private Uri uri;
     private PropertyData propertyData;
     private Bundle bundle;
-    private String propertyID, street_address, building_name, city_name, lat, lang, address, state, description, year_built, property, property_type, pincode, area_width, area_length, bedrooms, bathrooms, deposit, monthly_rent, furi;
+    private String propertyID, street_address, building_name, city_name, faddress,lat, lang, state, description, year_built, property, property_type, pincode, area_width, area_length, bedrooms, bathrooms, deposit, monthly_rent, furi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,13 +156,12 @@ public class EditProperty extends AppCompatActivity implements PassDataInterface
         propertyData.city_name = cityname;
         propertyData.state = state;
         propertyData.pincode = pincode;
-        this.address = buildingname+", "+streetaddress+", "+cityname+", "+state+", "+pincode;
+        this.faddress = buildingname+", "+streetaddress+", "+cityname+", "+state+", "+pincode;
         try {
-            addressList = geocoder.getFromLocationName(this.address, 1);
+            addressList = geocoder.getFromLocationName(this.faddress, 1);
             if (addressList != null){
                 propertyData.lat = String.valueOf(addressList.get(0).getLatitude());
                 propertyData.lang = String.valueOf(addressList.get(0).getLongitude());
-//                Toast.makeText(this, lat+" "+lang, Toast.LENGTH_LONG).show();
             }
         }catch (Exception e){
 
@@ -182,7 +181,6 @@ public class EditProperty extends AppCompatActivity implements PassDataInterface
         propertyData.bathrooms = bathroom;
         propertyData.deposit = deposit;
         propertyData.monthly_rent = monthly_rent;
-        Toast.makeText(this, property+" "+property_type+" "+area_width+" "+area_length+" "+year_built+" "+bedroom+" "+bathroom+" "+deposit+" "+monthly_rent, Toast.LENGTH_SHORT).show();
         next();
     }
 

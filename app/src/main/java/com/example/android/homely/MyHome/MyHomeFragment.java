@@ -109,10 +109,10 @@ public class MyHomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("dberr", error.toString());
                 imageView.setVisibility(View.VISIBLE);
                 addProperty_button.setVisibility(View.VISIBLE);
                 floating_button.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), error.getCode(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -133,7 +133,7 @@ public class MyHomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.e("dberr", error.toString());
             }
         });
 

@@ -78,12 +78,12 @@ public class ProfileFragment extends Fragment {
                 try {
                     String full_name = snapshot.child("fname").getValue().toString();
                     String e_mail = snapshot.child("email").getValue().toString();
-                    ProfileUri = Uri.parse(snapshot.child("profile_pic").getValue().toString());
-                    name.setText(full_name);
-                    email.setText(e_mail);
-                    if(ProfileUri != null){
+                    if(snapshot.hasChild("profile_pic")){
+                        ProfileUri = Uri.parse(snapshot.child("profile_pic").getValue().toString());
                         Picasso.get().load(ProfileUri).into(imageView);
                     }
+                    name.setText(full_name);
+                    email.setText(e_mail);
                 }catch (Exception e){
                     Log.e("DBError", String.valueOf(e));
                 }

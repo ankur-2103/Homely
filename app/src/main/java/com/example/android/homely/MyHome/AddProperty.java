@@ -61,7 +61,7 @@ public class AddProperty extends AppCompatActivity implements PassDataInterface 
     private DatabaseReference userDatabaseReference;
     private Uri uri;
     private PropertyData propertyData;
-    private String street_address, building_name, city_name, lat, lang, address, state, description, year_built, property, property_type, pincode, area_width, area_length, bedrooms, bathrooms, deposit, monthly_rent, furi;
+    private String street_address, building_name, city_name, faddress,lat, lang, state, description, year_built, property, property_type, pincode, area_width, area_length, bedrooms, bathrooms, deposit, monthly_rent, furi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,9 +149,9 @@ public class AddProperty extends AppCompatActivity implements PassDataInterface 
         this.city_name = cityname;
         this.state = state;
         this.pincode = pincode;
-        this.address = buildingname+", "+streetaddress+", "+cityname+", "+state+", "+pincode;
+        this.faddress = buildingname+", "+streetaddress+", "+cityname+", "+state+", "+pincode;
         try {
-            addressList = geocoder.getFromLocationName(this.address, 1);
+            addressList = geocoder.getFromLocationName(this.faddress, 1);
             if (addressList != null){
                 this.lat = String.valueOf(addressList.get(0).getLatitude());
                 this.lang = String.valueOf(addressList.get(0).getLongitude());
@@ -201,15 +201,15 @@ public class AddProperty extends AppCompatActivity implements PassDataInterface 
         storageReference = storage.getReference("Property/"+propertyID+"/propertyPic.jpg");
 
         if(uri!=null){
-
             storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri1) {
-                            propertyData = new PropertyData(street_address, building_name, city_name, lat, lang, state, description, year_built, property, property_type, pincode, area_width, area_length, bedrooms, bathrooms, deposit, monthly_rent, uri1.toString());
+                            propertyData = new PropertyData(street_address, building_name, city_name, faddress,lat, lang, state, description, year_built, property, property_type, pincode, area_width, area_length, bedrooms, bathrooms, deposit, monthly_rent, uri1.toString());
                             databaseReference.setValue(propertyData);
+                            userDatabaseReference.push().setValue(propertyID);
                         }
                     });
                 }
@@ -217,11 +217,11 @@ public class AddProperty extends AppCompatActivity implements PassDataInterface 
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(AddProperty.this, "Profile Image Upload Failed!!!", Toast.LENGTH_SHORT).show();
+                    Log.e("Fileup", e.toString());
                 }
             });
         }
 
-        userDatabaseReference.push().setValue(propertyID);
 
         }catch (Exception e){
             Log.e("PE", e.toString());
