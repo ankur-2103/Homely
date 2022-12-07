@@ -1,4 +1,4 @@
-package com.example.android.homely.data;
+package com.example.android.homely.Data;
 
 public class FilterData {
     private String property, priceMin, priceMax, bed, bath, areaMin, areaMax, propertyType;

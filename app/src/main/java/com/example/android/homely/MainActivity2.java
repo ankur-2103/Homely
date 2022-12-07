@@ -28,8 +28,8 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         BottomNavigationView mBottomNavigationView=(BottomNavigationView)findViewById(R.id.bottomNavigationView);
-        mBottomNavigationView.getMenu().findItem(R.id.search).setChecked(true);
-        replaceFragment(new MapsFragment());
+        mBottomNavigationView.getMenu().findItem(R.id.home).setChecked(true);
+        replaceFragment(new HomeFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){

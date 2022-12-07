@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.homely.R;
-import com.example.android.homely.data.PropertyData;
+import com.example.android.homely.Data.PropertyData;
 import com.example.android.homely.interfaces.PassDataInterface;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;

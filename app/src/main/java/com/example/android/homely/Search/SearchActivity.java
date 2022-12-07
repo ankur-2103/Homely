@@ -2,8 +2,6 @@ package com.example.android.homely.Search;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,19 +9,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.android.homely.MyHome.MyPropertyAdapter;
-import com.example.android.homely.MyHome.PropertyActivity;
 import com.example.android.homely.PropertyProfile;
 import com.example.android.homely.R;
-import com.example.android.homely.data.FilterData;
-import com.example.android.homely.data.PropertyData;
+import com.example.android.homely.Data.FilterData;
+import com.example.android.homely.Data.PropertyData;
 import com.example.android.homely.interfaces.PassDataInterface;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -70,7 +64,7 @@ public class SearchActivity extends AppCompatActivity implements PassDataInterfa
         mypropIDList = new ArrayList<String>();
         currPropIDList = new ArrayList<String>();
 
-        searchAdapter = new SearchAdapter(SearchActivity.this, propertyDataList, new MyPropertyAdapter.ItemClickListener() {
+        searchAdapter = new SearchAdapter(SearchActivity.this, propertyDataList, new SearchAdapter.ItemClickListener() {
             @Override
             public void onItemClick(PropertyData propertyData, int pos) {
                 Intent property = new Intent(SearchActivity.this, PropertyProfile.class);

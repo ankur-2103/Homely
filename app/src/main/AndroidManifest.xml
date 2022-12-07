@@ -17,6 +17,10 @@
         android:theme="@style/Theme.Homely"
         tools:targetApi="31">
         <activity
+            android:name=".Tour.AddTourActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+        <activity
             android:name=".PropertyProfile"
             android:exported="false" />
         <activity

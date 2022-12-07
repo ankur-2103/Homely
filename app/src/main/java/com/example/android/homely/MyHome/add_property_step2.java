@@ -15,7 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.android.homely.R;
-import com.example.android.homely.data.PropertyData;
+import com.example.android.homely.Data.PropertyData;
 import com.example.android.homely.interfaces.PassDataInterface;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;

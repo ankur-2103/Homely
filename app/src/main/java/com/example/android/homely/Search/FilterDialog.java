@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,11 +16,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.android.homely.R;
-import com.example.android.homely.data.FilterData;
+import com.example.android.homely.Data.FilterData;
 import com.example.android.homely.interfaces.PassDataInterface;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
@@ -29,7 +26,6 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FilterDialog extends DialogFragment {

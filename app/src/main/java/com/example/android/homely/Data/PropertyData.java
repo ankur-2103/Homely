@@ -1,4 +1,4 @@
-package com.example.android.homely.data;
+package com.example.android.homely.Data;
 
 
 import android.os.Parcel;

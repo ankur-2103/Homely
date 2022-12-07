@@ -1,6 +1,4 @@
-package com.example.android.homely.data;
-
-import android.net.Uri;
+package com.example.android.homely.Data;
 
 public class UserData {
     public String fname;

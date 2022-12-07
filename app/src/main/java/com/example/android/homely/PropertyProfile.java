@@ -3,16 +3,17 @@ package com.example.android.homely;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.example.android.homely.data.PropertyData;
+import com.example.android.homely.Data.PropertyData;
+import com.example.android.homely.Tour.AddTourActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -158,5 +159,16 @@ public class PropertyProfile extends AppCompatActivity {
         }catch (Exception e){
             Log.w("pice", "onCreate: "+e.toString() );
         }
+
+        tour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent Tour = new Intent(PropertyProfile.this, AddTourActivity.class);
+                Tour.putExtra("propertyID", propertyID);
+                Tour.putExtra("propertyName", propertyData.getBuilding_name());
+                Tour.putExtra("propertyLoc", propertyData.getCity_name()+", "+propertyData.getState());
+                startActivity(Tour);
+            }
+        });
     }
 }

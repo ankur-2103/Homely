@@ -9,13 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.homely.R;
-import com.example.android.homely.data.PropertyData;
+import com.example.android.homely.Data.PropertyData;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

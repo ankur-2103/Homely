@@ -3,7 +3,6 @@ package com.example.android.homely.Search;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,26 +15,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android.homely.MyHome.MyPropertyAdapter;
 import com.example.android.homely.R;
-import com.example.android.homely.data.FilterData;
-import com.example.android.homely.data.PropertyData;
+import com.example.android.homely.Data.FilterData;
+import com.example.android.homely.Data.PropertyData;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Locale;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewholder> implements Filterable {
 
     private Context context;
     private ArrayList<PropertyData> propertyDataList;
     private ArrayList<PropertyData> propertyDataListAll;
-    private MyPropertyAdapter.ItemClickListener itemClickListener;
+    private SearchAdapter.ItemClickListener itemClickListener;
     private FilterData filterData;
     private String property, priceMin, priceMax, bed, bath, areaMin, areaMax, propertyType;
 
-    public SearchAdapter(Context context, ArrayList<PropertyData> propertyDataList, MyPropertyAdapter.ItemClickListener itemClickListener) {
+    public SearchAdapter(Context context, ArrayList<PropertyData> propertyDataList, SearchAdapter.ItemClickListener itemClickListener) {
         this.context = context;
         this.propertyDataList = propertyDataList;
         this.propertyDataListAll = propertyDataList;

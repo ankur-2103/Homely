@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.homely.R;
-import com.example.android.homely.data.PropertyData;
+import com.example.android.homely.Data.PropertyData;
 import com.example.android.homely.interfaces.PassDataInterface;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

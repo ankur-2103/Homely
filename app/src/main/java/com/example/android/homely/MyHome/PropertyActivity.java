@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.homely.R;
-import com.example.android.homely.data.PropertyData;
+import com.example.android.homely.Data.PropertyData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -118,9 +118,9 @@ public class PropertyActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()){
-//                                            Toast.makeText(PropertyActivity.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(PropertyActivity.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
                                         }else{
-//                                            Toast.makeText(PropertyActivity.this, "Failed to Delete property", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(PropertyActivity.this, "Failed to Delete property", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
@@ -148,7 +148,25 @@ public class PropertyActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
+
+                databaseReference = firebaseDatabase.getReference("Tour");
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            if(dataSnapshot.child("propertyID").equals(propertyID)){
+                                databaseReference.child(dataSnapshot.getKey()).removeValue();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
+
     }
 }

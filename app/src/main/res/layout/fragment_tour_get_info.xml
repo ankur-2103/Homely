@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Tour.TourGetInfo">
+
+    <TextView
+        android:id="@+id/tourTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Request a home tour"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <RadioGroup
+        android:id="@+id/toutTypeRadioGrp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tour_radio"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tourTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:checkedButton="@id/radio1"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/tour_radio_selector"
+            android:button="@android:color/transparent"
+            android:text="In Person"
+            android:textSize="20dp"
+            />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/tour_radio_selector"
+            android:button="@android:color/transparent"
+            android:text="Virtual"
+            android:textSize="20dp"
+            />
+
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/dateTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick a date"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toutTypeRadioGrp"
+        />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScroll1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:scrollbars="none"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints">
+        <RadioGroup
+            android:id="@+id/dateRadioGrp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+        </RadioGroup>
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/timeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick a time"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScroll1"
+        />
+
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScroll2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scrollbars="none"
+        tools:ignore="MissingConstraints">
+        <RadioGroup
+            android:id="@+id/timeRadioGrp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+        </RadioGroup>
+    </HorizontalScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submitBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Schedule Tour"
+        android:textAllCaps="false"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

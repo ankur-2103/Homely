@@ -2,7 +2,7 @@ package com.example.android.homely.interfaces;
 
 import android.net.Uri;
 
-import com.example.android.homely.data.FilterData;
+import com.example.android.homely.Data.FilterData;
 
 public interface PassDataInterface {
     public default void onDataReceivedStep1(String buildingname, String streetaddress, String cityname, String state, String pincode){
@@ -18,5 +18,17 @@ public interface PassDataInterface {
     }
 
     public default void onDataReceivedFilterBox(FilterData filterData){
+    }
+
+    public default void onDataReceivedTourGetInfo(String tourType, String tourDate, String tourTime){
+    }
+
+    public default void onDataReceivedVerifyPhone(Boolean isVerified){
+    }
+
+    public default void onDataReceivedVirtualTourType(String virtualType){
+    }
+
+    public default void onDataReceivedScheduleTour(Boolean isConfirmed){
     }
 }

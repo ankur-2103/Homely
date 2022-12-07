@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.android.homely.R;
-import com.example.android.homely.data.PropertyData;
+import com.example.android.homely.Data.PropertyData;
 import com.example.android.homely.interfaces.PassDataInterface;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -234,7 +234,7 @@ public class AddProperty extends AppCompatActivity implements PassDataInterface 
         Date date = new Date();
         String dt=String.valueOf(dateFormat.format(date));
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat time = new SimpleDateFormat("HHmm");
+        SimpleDateFormat time = new SimpleDateFormat("HHmmss");
         String tm= String.valueOf(time.format(new Date()));
         String id= dt+tm;
         System.out.println(id);
