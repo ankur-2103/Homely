@@ -17,9 +17,16 @@
         android:theme="@style/Theme.Homely"
         tools:targetApi="31">
         <activity
-            android:name=".Tour.AddTourActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:name=".Tour.AcceptTourActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".Tour.TourActivity"
             android:exported="false" />
+        <activity
+            android:name=".Tour.AddTourActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".PropertyProfile"
             android:exported="false" />
@@ -71,11 +78,6 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

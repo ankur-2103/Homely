@@ -47,12 +47,13 @@
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/tour_radio.xml" value="0.2545" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/tour_radio_txt.xml" value="0.2555" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/drawable/tour_type_radio_selector.xml" value="0.2545" />
-        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_add_property.xml" value="0.25" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_accept_tour.xml" value="0.25" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_add_property.xml" value="0.264" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_add_tour.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_change_password.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_edit_property.xml" value="0.264" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_forget_password.xml" value="0.264" />
-        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_login.xml" value="0.4" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_main2.xml" value="0.15492957746478872" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_main3.xml" value="0.25" />
@@ -61,10 +62,12 @@
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_property_profile.xml" value="0.2747395833333333" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_search.xml" value="0.536" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_tour.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_update_profile.xml" value="0.20505344995140914" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/activity_user.xml" value="0.4" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/drop_down_item.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/filter_box.xml" value="0.34933774834437087" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_accept_tour.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_add_property_step1.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_add_property_step2.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_add_property_step3.xml" value="0.25" />
@@ -80,12 +83,14 @@
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_schedule_tour.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_search.xml" value="0.2359375" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_today_tour.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_tour_get_info.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_verify_phone_number.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/fragment_virtual_tour_type.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/home_property_item.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/marker_property.xml" value="0.29760225669957685" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/my_property_item.xml" value="0.4" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/layout/tour_item_card.xml" value="0.4" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/menu/menu_items.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/menu/nav_menu.xml" value="0.25" />

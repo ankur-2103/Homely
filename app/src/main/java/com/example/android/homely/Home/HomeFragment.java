@@ -166,6 +166,7 @@ public class HomeFragment extends Fragment {
                 if(snapshot.getValue()!=null){
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         mypropIDList.add(dataSnapshot.getValue().toString());
+                        Log.d("dr", dataSnapshot.getValue().toString());
                     }
                 }
             }
@@ -182,6 +183,7 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     if(!mypropIDList.contains(dataSnapshot.getKey()) && !currPropIDList.contains(dataSnapshot.getKey())){
                         PropertyData propertyData = dataSnapshot.getValue(PropertyData.class);
+                        Log.d("pr", dataSnapshot.getKey().toString());
                         if(propertyData.getFaddress().toLowerCase().contains(currLoc.getText().toString().toLowerCase())){
                             propertyDataList.add(dataSnapshot.getValue(PropertyData.class));
                             currPropIDList.add(dataSnapshot.getKey());

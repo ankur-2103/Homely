@@ -2,6 +2,7 @@ package com.example.android.homely;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
@@ -12,6 +13,8 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.android.homely.Tour.TourActivity;
+import com.example.android.homely.Tour.TourAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,13 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         Intent intent1 = new Intent(MainActivity.this, MainActivity2.class);
+        Intent intent2 = new Intent(MainActivity.this, TourActivity.class);
         auth = FirebaseAuth.getInstance();
 
         new Handler().postDelayed(() -> {
             if(auth.getCurrentUser()==null){
                 startActivity(intent);
             }else {
-                startActivity(intent1);
+                startActivity(intent2);
             }
             finish();
         }, SPLASH_TIMER);
