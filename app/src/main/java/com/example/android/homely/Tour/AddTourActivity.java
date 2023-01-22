@@ -127,6 +127,9 @@ public class AddTourActivity extends AppCompatActivity implements PassDataInterf
     private void submitData() {
         String tourId = getTourID();
         databaseReference.child(tourId).setValue(tourData);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = firebaseDatabase.getReference("User/"+firebaseUser.getUid()+"/my_tour");
+        reference.push().setValue(tourId);
         Toast.makeText(this, "Tour Added Successfully", Toast.LENGTH_SHORT).show();
         finish();
     }

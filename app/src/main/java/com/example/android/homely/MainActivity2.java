@@ -1,19 +1,29 @@
 package com.example.android.homely;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.android.homely.Home.HomeFragment;
 import com.example.android.homely.MyHome.MyHomeFragment;
-import com.example.android.homely.Notification.NotificationsFragment;
 import com.example.android.homely.Profile.ProfileFragment;
 import com.example.android.homely.Search.MapsFragment;
+import com.example.android.homely.SendNotification.APIService;
+import com.example.android.homely.SendNotification.Client;
+import com.example.android.homely.SendNotification.Token;
 import com.example.android.homely.databinding.ActivityMain2Binding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -42,14 +52,26 @@ public class MainActivity2 extends AppCompatActivity {
                 case R.id.myhome:
                     replaceFragment(new MyHomeFragment());
                     break;
-                case R.id.notification:
-                    replaceFragment(new NotificationsFragment());
-                    break;
                 case R.id.profile:
                     replaceFragment(new ProfileFragment());
                     break;
             }
             return true;
+        });
+
+        UpdateToken();
+    }
+
+    private void UpdateToken() {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if(task.isSuccessful()){
+                    Token token = new Token(task.getResult());
+                    FirebaseDatabase.getInstance().getReference("Token").child(firebaseUser.getUid()).setValue(token);
+                }
+            }
         });
     }
 

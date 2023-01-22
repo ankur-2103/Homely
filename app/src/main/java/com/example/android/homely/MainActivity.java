@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             if(auth.getCurrentUser()==null){
                 startActivity(intent);
             }else {
-                startActivity(intent2);
+                startActivity(intent1);
             }
             finish();
         }, SPLASH_TIMER);

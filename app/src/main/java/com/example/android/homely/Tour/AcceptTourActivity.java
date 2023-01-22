@@ -5,15 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.homely.Data.PropertyData;
 import com.example.android.homely.Data.TourData;
 import com.example.android.homely.PropertyProfile;
 import com.example.android.homely.R;
+import com.example.android.homely.SendNotification.APIService;
+import com.example.android.homely.SendNotification.Client;
+import com.example.android.homely.SendNotification.Data;
+import com.example.android.homely.SendNotification.MyResponse;
+import com.example.android.homely.SendNotification.NotificationSender;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.radiobutton.MaterialRadioButton;
@@ -25,6 +32,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AcceptTourActivity extends AppCompatActivity {
 
@@ -39,12 +50,16 @@ public class AcceptTourActivity extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private DatabaseReference reference;
     private MaterialCardView materialCardView;
+    private APIService apiService;
+    private String userToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accept_tour);
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
         ptxt = findViewById(R.id.pName);
         ploc = findViewById(R.id.pLoc);
@@ -65,6 +80,21 @@ public class AcceptTourActivity extends AppCompatActivity {
 
         tourData = (TourData) getIntent().getParcelableExtra("tourData");
         tourId = (String) getIntent().getStringExtra("tourId");
+        reference = firebaseDatabase.getReference("Token/"+tourData.getUserID());
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot!=null){
+                    userToken =  snapshot.child("token").getValue().toString();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         if (!tourData.getAgentName().equals("null")){
             agName.setText(tourData.getAgentName());
@@ -117,15 +147,22 @@ public class AcceptTourActivity extends AppCompatActivity {
                     }else{
                         submit();
                     }
+                }else{
+                    submit();
                 }
             }
 
             private void submit() {
+                String title="Tour", message;
                 if(tourStatus.equals("Accept")){
                     tourData.status = "Accepted";
                     tourData.agentName = agentName;
                     tourData.agentPhoneNumber = agentPhoneNumber;
                     tourData.agentEmail = agentEmail;
+                    message = "Your tour for "+tourData.getPropertyName()+" has been scheduled for "+tourData.getTourDate()+ " at "+tourData.getTourTime();
+                }else{
+                    tourData.status = "Rejected";
+                    message = "Your tour for "+tourData.getPropertyName()+" has been rejected";
                 }
 
                 if(!description.isEmpty()){
@@ -133,6 +170,25 @@ public class AcceptTourActivity extends AppCompatActivity {
                 }
                 databaseReference = firebaseDatabase.getReference("Tour/"+tourId);
                 databaseReference.setValue(tourData);
+
+                Data data = new Data(title, message);
+                NotificationSender notificationSender = new NotificationSender(data, userToken);
+                apiService.sendNotification(notificationSender).enqueue(new Callback<MyResponse>() {
+                    @Override
+                    public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                        Log.d("respo", "onResponse: "+response.body().success);
+                        if(response.code()==200 && response.body().success!=1){
+                            Toast.makeText(AcceptTourActivity.this, "Notification send", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<MyResponse> call, Throwable t) {
+                        Log.d("gfg1", "onFailure: "+t);
+                        Toast.makeText(AcceptTourActivity.this, "Notification not send", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 finish();
             }
         });
