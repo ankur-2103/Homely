@@ -7,16 +7,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.android.homely.Home.HomeFragment;
 import com.example.android.homely.MyHome.MyHomeFragment;
 import com.example.android.homely.Profile.ProfileFragment;
 import com.example.android.homely.Search.MapsFragment;
-import com.example.android.homely.SendNotification.APIService;
-import com.example.android.homely.SendNotification.Client;
 import com.example.android.homely.SendNotification.Token;
-import com.example.android.homely.databinding.ActivityMain2Binding;
+import com.example.android.homely.databinding.ActivityUsernavBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,16 +22,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-public class MainActivity2 extends AppCompatActivity {
+public class UserNav extends AppCompatActivity {
 
-    private ActivityMain2Binding binding;
+    private ActivityUsernavBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_usernav);
 
-        binding = ActivityMain2Binding.inflate(getLayoutInflater());
+        binding = ActivityUsernavBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         BottomNavigationView mBottomNavigationView=(BottomNavigationView)findViewById(R.id.bottomNavigationView);

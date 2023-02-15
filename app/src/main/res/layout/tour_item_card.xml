@@ -11,6 +11,7 @@
     app:cardCornerRadius="15dp">
 
     <LinearLayout
+        android:id="@+id/tourCard"
         android:layout_margin="10dp"
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -18,9 +19,9 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/bname"
+            android:id="@+id/tbname"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Building Name"
             android:textSize="18dp"
@@ -30,8 +31,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp">
+            android:layout_marginTop="5dp">
             <TextView
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
                 android:textColor="@color/black"
                 android:textSize="18dp"/>
             <TextView
-                android:id="@+id/dateTxt"
+                android:id="@+id/tdateTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Wed, Dec 02 2022"
@@ -51,8 +51,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp">
+            android:layout_marginTop="5dp">
             <TextView
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
@@ -61,12 +60,129 @@
                 android:textColor="@color/black"
                 android:textSize="18dp"/>
             <TextView
-                android:id="@+id/timeTxt"
+                android:id="@+id/ttimeTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="09:00 AM"
                 android:textColor="@color/black"
                 android:textSize="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:textColor="@color/black"
+                android:textSize="18dp"/>
+            <TextView
+                android:id="@+id/tstatusTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pending"
+                android:textColor="@color/black"
+                android:textSize="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/guidDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Guide Details"
+                android:textColor="@color/black"
+                android:textSize="18dp"/>
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name: "
+                    android:textColor="@color/black"
+                    android:textSize="18dp"/>
+                <TextView
+                    android:id="@+id/gNameTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Abusj askjkj"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone: "
+                    android:textColor="@color/black"
+                    android:textSize="18dp"/>
+                <TextView
+                    android:id="@+id/gphoneTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1234567890"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="E-mail: "
+                    android:textColor="@color/black"
+                    android:textSize="18dp"/>
+                <TextView
+                    android:id="@+id/gEmailTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="asjksa@kslaks..ass"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/description1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"/>
+                <TextView
+                    android:id="@+id/descTxt"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pending"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

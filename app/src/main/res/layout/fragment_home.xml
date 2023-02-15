@@ -6,62 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Home.HomeFragment">
 
-    <LinearLayout
-        android:id="@+id/locationLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        >
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Location" />
-            <LinearLayout
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:padding="0dp"
-                    android:layout_margin="0dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_location_outline"/>
-                <TextView
-                    android:id="@+id/currLoc"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mumbai, Maharashtra"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    />
-            </LinearLayout>
-        </LinearLayout>
-
-        <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:strokeColor="@color/black"
-            app:strokeWidth="2dp"
-            app:cardCornerRadius="50dp">
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_outline_notifications_24"
-                android:backgroundTint="@android:color/transparent"/>
-        </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
-    </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/search_card"
@@ -72,7 +16,7 @@
         android:layout_marginRight="15dp"
         app:cardElevation="5dp"
         app:cardCornerRadius="30dp"
-        app:layout_constraintTop_toBottomOf="@id/locationLayout"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints">

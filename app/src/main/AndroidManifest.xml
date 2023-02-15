@@ -17,9 +17,18 @@
         android:theme="@style/Theme.Homely"
         tools:targetApi="31">
         <activity
+            android:name=".Profile.MyTourActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Profile.Favorites"
+            android:exported="false" />
+        <activity
+            android:name=".AdminNav"
+            android:exported="false" />
+        <activity
             android:name=".Tour.AcceptTourActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Tour.TourActivity"
             android:exported="false" />
@@ -34,8 +43,6 @@
             android:name=".Search.SearchActivity"
             android:exported="false" />
         <!--
-             TODO: Before you run your application, you need a Google Maps API key.
-
              To get one, follow the directions here:
 
                 https://developers.google.com/maps/documentation/android-sdk/get-api-key
@@ -47,6 +54,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyANUo5c78zY8zA_RZmwzPTewoRecb-mEfA" />
+
         <service
             android:name=".SendNotification.MyFirebaseMessagingService"
             android:exported="false">
@@ -54,6 +62,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <activity
             android:name=".MyHome.EditProperty"
             android:exported="false" />
@@ -73,7 +82,7 @@
             android:name=".Profile.ForgetPassword"
             android:exported="false" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".UserNav"
             android:exported="false" />
         <activity
             android:name=".UserActivity"
@@ -83,13 +92,13 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

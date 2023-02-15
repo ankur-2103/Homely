@@ -29,7 +29,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     private ArrayList<PropertyData> propertyDataListAll;
     private SearchAdapter.ItemClickListener itemClickListener;
     private FilterData filterData;
-    private String property, priceMin, priceMax, bed, bath, areaMin, areaMax, propertyType;
 
     public SearchAdapter(Context context, ArrayList<PropertyData> propertyDataList, SearchAdapter.ItemClickListener itemClickListener) {
         this.context = context;

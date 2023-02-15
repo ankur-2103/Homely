@@ -47,9 +47,6 @@ import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
-    private Location currentLocation;
-    private FusedLocationProviderClient fusedLocationProviderClient;
-    private static final int REQUEST_CODE = 101;
     private TextView currLoc;
     private EditText searchTxt;
     private FirebaseAuth firebaseAuth;
@@ -66,53 +63,10 @@ public class HomeFragment extends Fragment {
 
     public HomeFragment() {}
 
-    private void fetchLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-            return;
-        }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    currentLocation = location;
-                    LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-
-                    try {
-                        Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
-                        List<Address> addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-                        String cityName = addresses.get(0).getAddressLine(0);
-                        String stateName = addresses.get(0).getAddressLine(1);
-                        String countryName = addresses.get(0).getAddressLine(2);
-                        currLoc.setText(addresses.get(0).getLocality()+", "+addresses.get(0).getAdminArea());
-                    } catch (IOException e) {
-                        Log.w("locate", e.toString());
-                    }
-
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    fetchLocation();
-                }
-                break;
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        currLoc = view.findViewById(R.id.currLoc);
         recyclerView = view.findViewById(R.id.homeRecyclerView);
         searchIcon = view.findViewById(R.id.search_button);
         searchTxt = view.findViewById(R.id.search_txt);
@@ -128,8 +82,6 @@ public class HomeFragment extends Fragment {
         mypropIDList = new ArrayList<>();
         currPropIDList = new ArrayList<>();
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
-        fetchLocation();
 
         homeAdapter = new HomeAdapter(getContext(), propertyDataList, new HomeAdapter.ItemClickListener() {
             @Override
@@ -160,34 +112,19 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue()!=null){
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        mypropIDList.add(dataSnapshot.getValue().toString());
-                        Log.d("dr", dataSnapshot.getValue().toString());
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
         propertyFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Log.d("home123", "onDataChange: "+snapshot.getValue());
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    if(!mypropIDList.contains(dataSnapshot.getKey()) && !currPropIDList.contains(dataSnapshot.getKey())){
+                    Log.d("home12345", "onDataChange: "+!user.getUid().equals(dataSnapshot.child("userID").getValue().toString()));
+                    Log.d("home1234", "onDataChange: "+!currPropIDList.contains(dataSnapshot.getKey()));
+                    if(!user.getUid().equals(dataSnapshot.child("userID").getValue().toString()) && !currPropIDList.contains(dataSnapshot.getKey())){
                         PropertyData propertyData = dataSnapshot.getValue(PropertyData.class);
-                        Log.d("pr", dataSnapshot.getKey().toString());
-                        if(propertyData.getFaddress().toLowerCase().contains(currLoc.getText().toString().toLowerCase())){
-                            propertyDataList.add(dataSnapshot.getValue(PropertyData.class));
-                            currPropIDList.add(dataSnapshot.getKey());
-                        }
+                        Log.d("home123", "onDataChange: "+!user.getUid().equals(dataSnapshot.child("userID").getValue().toString()));
+                        propertyDataList.add(dataSnapshot.getValue(PropertyData.class));
+                        currPropIDList.add(dataSnapshot.getKey());
+
                     }
                 }
                 homeAdapter.notifyDataSetChanged();

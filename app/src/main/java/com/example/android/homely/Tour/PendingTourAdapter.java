@@ -41,7 +41,7 @@ public class PendingTourAdapter extends RecyclerView.Adapter<PendingTourAdapter.
     @NonNull
     @Override
     public TourViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.tour_item_card, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.tour_item, parent, false);
         return new PendingTourAdapter.TourViewHolder(view);
     }
 

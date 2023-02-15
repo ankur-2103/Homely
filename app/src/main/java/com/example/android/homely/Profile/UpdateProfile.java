@@ -166,7 +166,6 @@ public class UpdateProfile extends AppCompatActivity {
             databaseReference.child("phone").setValue(phone_number);
         }
         if(!e_mail.equals(email)){
-            databaseReference.child("email").setValue(email);
             changeEmail(email);
         }
         if(filePath != null){
@@ -184,11 +183,10 @@ public class UpdateProfile extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if (!task.isSuccessful()){
                     success = false;
-                    try {
-                        throw task.getException();
-                    }catch (Exception e){
-                        Toast.makeText(UpdateProfile.this, "Email Update Failed!!!", Toast.LENGTH_SHORT).show();
-                    }
+                    Log.d("email", "onComplete: "+task.getException());
+                    Toast.makeText(UpdateProfile.this, "Email Update Failed!!!", Toast.LENGTH_SHORT).show();
+                }else{
+                    databaseReference.child("email").setValue(email);
                 }
             }
         });
@@ -220,7 +218,6 @@ public class UpdateProfile extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         finish();
     }
 }

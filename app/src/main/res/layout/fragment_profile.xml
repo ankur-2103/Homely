@@ -22,8 +22,7 @@
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
+        android:layout_marginLeft="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -79,219 +78,121 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/updateProfile"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/ic_outline_account_circle_24_1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="DuplicateIds" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="#F5F6F8">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="Update profile"
-                android:textColor="#353945"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toTopOf="@+id/imageView4"
-                tools:ignore="DuplicateIds" />
+                android:gravity="center"
+                android:layout_margin="5dp">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_outline_account_circle_24_1"/>
 
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView10"
-                tools:ignore="DuplicateIds"
-                tools:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Update Profile"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#353945"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/changePassword"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/ic_outline_lock_reset_24_1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="DuplicateIds" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="#F5F6F8">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="Change password"
-                android:textColor="#353945"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView6"
-                app:layout_constraintStart_toEndOf="@+id/imageView6"
-                app:layout_constraintTop_toTopOf="@+id/imageView6"
-                tools:ignore="DuplicateIds" />
+                android:gravity="center"
+                android:layout_margin="5dp">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_outline_lock_reset_24_1"/>
 
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView11"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView11"
-                tools:ignore="DuplicateIds"
-                tools:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Change Password"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#353945"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/myFavorites"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/favorites"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/ic_baseline_favorite_border_24_1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="DuplicateIds" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="#F5F6F8">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="My favorites"
-                android:textColor="#353945"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-                app:layout_constraintStart_toEndOf="@+id/imageView8"
-                app:layout_constraintTop_toTopOf="@+id/imageView8"
-                tools:ignore="DuplicateIds" />
+                android:gravity="center"
+                android:layout_margin="5dp">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_baseline_favorite_border_24_1"/>
 
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView12"
-                tools:ignore="DuplicateIds"
-                tools:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favorites"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#353945"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/recentlyViewed"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/myTours"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/ic_outline_remove_red_eye_24_1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="DuplicateIds" />
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="#F5F6F8">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="Recently viewed"
-                android:textColor="#353945"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-                app:layout_constraintStart_toEndOf="@+id/imageView10"
-                app:layout_constraintTop_toTopOf="@+id/imageView10"
-                tools:ignore="DuplicateIds" />
+                android:gravity="center"
+                android:layout_margin="5dp">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_outline_calendar_month_24_1"/>
 
-            <ImageView
-                android:id="@+id/imageView11"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView13"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView13"
-                tools:ignore="DuplicateIds"
-                tools:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/pastTour"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/imageView12"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/ic_outline_calendar_month_24_1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="DuplicateIds" />
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="Past Tour"
-                android:textColor="#353945"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView12"
-                app:layout_constraintStart_toEndOf="@+id/imageView12"
-                app:layout_constraintTop_toTopOf="@+id/imageView12"
-                tools:ignore="DuplicateIds" />
-
-            <ImageView
-                android:id="@+id/imageView13"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView14"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView14"
-                tools:ignore="DuplicateIds"
-                tools:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tours"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#353945"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 

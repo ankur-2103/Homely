@@ -12,8 +12,8 @@ public class TourAdapter extends FragmentPagerAdapter {
     private final ArrayList<Fragment> fragmentArrayList = new ArrayList<Fragment>();
     private final ArrayList<String> fragmentTitle = new ArrayList<String>();
 
-    public TourAdapter(@NonNull FragmentManager fm, int behavior) {
-        super(fm, behavior);
+    public TourAdapter(@NonNull FragmentManager fm) {
+        super(fm);
     }
 
     @NonNull

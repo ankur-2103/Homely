@@ -3,13 +3,17 @@ package com.example.android.homely;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.android.homely.Data.PropertyData;
@@ -24,13 +28,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 public class PropertyProfile extends AppCompatActivity {
 
     private PropertyData propertyData;
     private String propertyID;
-    private TextView bname, saddress, bath, bed, area, desc, pTag1, pTag2, price1, price2;
+    private TextView bname, saddress, bath, bed, area, desc, pTag1, pTag2, price1, price2, uname, uemail, uphone, uinfo;
+    private LinearLayout ownerinfo;
     private ImageView imageView;
     private ToggleButton like;
     private MaterialButton tour, negotiate;
@@ -41,6 +47,8 @@ public class PropertyProfile extends AppCompatActivity {
     private StorageReference storageReference;
     private DatabaseReference propertyFirebaseDatabase;
     private DatabaseReference databaseReference;
+    private SharedPreferences sharedPreferences;
+    private boolean isAdmin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +57,9 @@ public class PropertyProfile extends AppCompatActivity {
 
         propertyData = (PropertyData) getIntent().getParcelableExtra("propertyData");
         propertyID = (String) getIntent().getStringExtra("propertyID");
+
+        sharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        isAdmin = sharedPreferences.getBoolean("isAdmin", false);
 
         bname = findViewById(R.id.bname);
         saddress = findViewById(R.id.streetAddress);
@@ -62,14 +73,40 @@ public class PropertyProfile extends AppCompatActivity {
         price2 = findViewById(R.id.price2);
         imageView = findViewById(R.id.imageView);
         tour = findViewById(R.id.tourButton);
-        negotiate = findViewById(R.id.negotiateButton);
         like = findViewById(R.id.likeToggle);
+        ownerinfo = findViewById(R.id.ownerinfo);
+        uname = findViewById(R.id.uname);
+        uemail = findViewById(R.id.uemail);
+        uphone = findViewById(R.id.uphone);
+        uinfo = findViewById(R.id.ownerinfo1);
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("User/"+user.getUid()+"/favourites");
         propertyFirebaseDatabase = firebaseDatabase.getReference("Property");
         storage = FirebaseStorage.getInstance();
+
+        if(isAdmin){
+            ownerinfo.setVisibility(View.VISIBLE);
+            uinfo.setVisibility(View.VISIBLE);
+            tour.setVisibility(View.GONE);
+            DatabaseReference reference = firebaseDatabase.getReference("User/"+propertyData.getUserID());
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.getValue()!=null){
+                        uname.setText(snapshot.child("fname").getValue().toString());
+                        uemail.setText(snapshot.child("email").getValue().toString());
+                        uphone.setText(snapshot.child("phone").getValue().toString());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

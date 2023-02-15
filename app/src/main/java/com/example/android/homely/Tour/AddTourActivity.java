@@ -30,7 +30,6 @@ public class AddTourActivity extends AppCompatActivity implements PassDataInterf
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private TourGetInfo tourGetInfo;
-    private VerifyPhoneNumber verifyEmailPhoneNumber;
     private VirtualTourType virtualTourType;
     private ScheduleTour scheduleTour;
     private Boolean isVerified = false;
@@ -48,7 +47,6 @@ public class AddTourActivity extends AppCompatActivity implements PassDataInterf
         setContentView(R.layout.activity_add_tour);
 
         tourGetInfo = TourGetInfo.newInstance(AddTourActivity.this);
-        verifyEmailPhoneNumber = VerifyPhoneNumber.newInstance(AddTourActivity.this);
         virtualTourType = VirtualTourType.newInstance(AddTourActivity.this);
         scheduleTour = ScheduleTour.newInstance(AddTourActivity.this);
 
@@ -75,19 +73,8 @@ public class AddTourActivity extends AppCompatActivity implements PassDataInterf
             tourData.virtualType = "null";
         }
         Toast.makeText(this, tourType+" "+tourDate+" "+tourTime, Toast.LENGTH_SHORT).show();
-        i = isVerified ? tourType.equals("Virtual") ? 3 : 4 : 2;
+        i = tourType.equals("Virtual") ? 2 : 3;
         loadFragment();
-    }
-
-    @Override
-    public void onDataReceivedVerifyPhone(Boolean isVerified) {
-        if (isVerified){
-            this.isVerified = isVerified;
-            i = tourData.getTourType().toString().equals("Virtual") ? 3 : 4;
-            loadFragment();
-        }else{
-            finish();
-        }
     }
 
     @Override
@@ -110,11 +97,9 @@ public class AddTourActivity extends AppCompatActivity implements PassDataInterf
     public void loadFragment(){
         if(i==1){
             updateFragment(tourGetInfo, "tourGetInfo");
-        }else if(i==2 && !isVerified){
-            updateFragment(verifyEmailPhoneNumber, "verifyEmailPhoneNumber");
-        }else if (i==3 && tourData.getTourType().toString().equals("Virtual")){
+        }else if (i==2 && tourData.getTourType().toString().equals("Virtual")){
             updateFragment(virtualTourType, "virtualTourType");
-        }else if (i==4){
+        }else if (i==3){
             bundle = new Bundle();
             bundle.putParcelable("tourData", tourData);
             scheduleTour.setArguments(bundle);

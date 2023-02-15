@@ -287,35 +287,101 @@ tools:context=".PropertyProfile">
         </LinearLayout>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/ownerinfo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Owner Information"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:visibility="gone"
+        />
+
     <LinearLayout
+        android:id="@+id/ownerinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/unametxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name: "
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/uname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text=""
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/uemailtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E-mail: "
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/uemail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text=""
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/uphonetxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone: "
+                android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/uphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text=""
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tourButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        >
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/tourButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:cornerRadius="10dp"
-            android:layout_weight="1"
-            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
-            android:text="Schedule Tour"
-            android:textAllCaps="false"
-            android:textSize="15dp"/>
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/negotiateButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            app:cornerRadius="10dp"
-            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
-            android:layout_weight="1"
-            android:text="Negotiate Price"
-            android:textAllCaps="false"
-            android:textSize="15dp"/>
-    </LinearLayout>
+        android:layout_margin="10dp"
+        app:cornerRadius="10dp"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+        android:text="Schedule Tour"
+        android:textAllCaps="false"
+        android:textSize="15dp"/>
 </LinearLayout>
 
 </ScrollView>

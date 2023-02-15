@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -18,12 +19,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText email, pass;
     private MaterialButton login;
     private FirebaseAuth auth;
+    private FirebaseUser firebaseUser;
+    private DatabaseReference databaseReference;
+    private SharedPreferences sharedPreferences;
+    private boolean isAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,17 +97,43 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    Intent user = new Intent(LoginActivity.this, MainActivity2.class);
-                    user.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(user);
+                    initUser();
                 }else{
-                    try {
-                        throw task.getException();
-                    }catch (Exception e){
-                        Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(LoginActivity.this, "Wrong Credentials", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+
+    private void initUser() {
+        Intent intent1 = new Intent(LoginActivity.this, UserNav.class);
+        Intent intent2 = new Intent(LoginActivity.this, AdminNav.class);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        firebaseUser = auth.getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference("User/"+firebaseUser.getUid()+"/isAdmin");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                isAdmin = (boolean) snapshot.getValue();
+                sharedPreferences  = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("isAdmin", isAdmin);
+                editor.apply();
+                if(isAdmin){
+                    startActivity(intent2);
+                } else {
+                    startActivity(intent1);
+                }
+                finish();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

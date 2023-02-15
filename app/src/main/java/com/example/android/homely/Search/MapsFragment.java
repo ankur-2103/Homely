@@ -212,12 +212,15 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMarkerClickLis
         propertyFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                Log.d("home123", "onDataChange: "+snapshot.getValue());
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    if(!mypropIDList.contains(dataSnapshot.getKey()) && !currPropIDList.contains(dataSnapshot.getKey())){
-                        Log.w("faddress", dataSnapshot.getValue().toString());
+                    Log.d("home12345", "onDataChange: "+!user.getUid().equals(dataSnapshot.child("userID").getValue().toString()));
+                    Log.d("home1234", "onDataChange: "+!currPropIDList.contains(dataSnapshot.getKey()));
+                    if(!user.getUid().equals(dataSnapshot.child("userID").getValue().toString()) && !currPropIDList.contains(dataSnapshot.getKey())){
                         PropertyData propertyData = dataSnapshot.getValue(PropertyData.class);
                         list.put(dataSnapshot.getKey(), propertyData);
                         currPropIDList.add(dataSnapshot.getKey());
+
                     }
                 }
                 mapFragment.getMapAsync(callback);

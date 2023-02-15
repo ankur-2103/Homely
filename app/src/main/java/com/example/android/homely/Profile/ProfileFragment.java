@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.android.homely.LoginActivity;
 import com.example.android.homely.R;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -46,8 +47,8 @@ public class ProfileFragment extends Fragment {
     private FirebaseStorage storage;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
-    private Intent updateProfile, changePassword;
-    private ConstraintLayout uprofile, changepassword;
+    private Intent updateProfile, changePassword, favoritesI, tour;
+    private MaterialCardView uprofile, changepassword, favorites, tours;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -64,7 +65,9 @@ public class ProfileFragment extends Fragment {
         signout = view.findViewById(R.id.signout_button);
         uprofile = view.findViewById(R.id.updateProfile);
         changepassword = view.findViewById(R.id.changePassword);
+        favorites = view.findViewById(R.id.favorites);
         auth = FirebaseAuth.getInstance();
+        tours = view.findViewById(R.id.myTours);
 
         user = auth.getCurrentUser();
 
@@ -120,6 +123,22 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 changePassword = new Intent(getContext(), ChangePassword.class);
                 startActivity(changePassword);
+            }
+        });
+
+        favorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                favoritesI = new Intent(getContext(), Favorites.class);
+                startActivity(favoritesI);
+            }
+        });
+
+        tours.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tour = new Intent(getContext(), MyTourActivity.class);
+                startActivity(tour);
             }
         });
 
