@@ -71,7 +71,6 @@ public class TodayTourFragment extends Fragment {
         databaseReference.orderByChild("status").equalTo("Accepted").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("data", "onDataChange: "+snapshot);
                 if (snapshot.getValue() != null){
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         if(!tourIdArrayList.contains(dataSnapshot.getKey())){

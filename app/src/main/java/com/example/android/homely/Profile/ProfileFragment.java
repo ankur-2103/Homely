@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.homely.Booking.MyBookingsActivity;
 import com.example.android.homely.LoginActivity;
 import com.example.android.homely.R;
 import com.google.android.material.card.MaterialCardView;
@@ -47,8 +48,8 @@ public class ProfileFragment extends Fragment {
     private FirebaseStorage storage;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
-    private Intent updateProfile, changePassword, favoritesI, tour;
-    private MaterialCardView uprofile, changepassword, favorites, tours;
+    private Intent updateProfile, changePassword, favoritesI, tour, booking;
+    private MaterialCardView uprofile, changepassword, favorites, tours, bookings;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -68,6 +69,7 @@ public class ProfileFragment extends Fragment {
         favorites = view.findViewById(R.id.favorites);
         auth = FirebaseAuth.getInstance();
         tours = view.findViewById(R.id.myTours);
+        bookings = view.findViewById(R.id.myDeal);
 
         user = auth.getCurrentUser();
 
@@ -139,6 +141,14 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 tour = new Intent(getContext(), MyTourActivity.class);
                 startActivity(tour);
+            }
+        });
+
+        bookings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                booking = new Intent(getContext(), MyBookingsActivity.class);
+                startActivity(booking);
             }
         });
 

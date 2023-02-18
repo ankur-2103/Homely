@@ -372,16 +372,35 @@ tools:context=".PropertyProfile">
         </LinearLayout>
     </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/tourButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:cornerRadius="10dp"
-        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
-        android:text="Schedule Tour"
-        android:textAllCaps="false"
-        android:textSize="15dp"/>
+        android:gravity="center"
+        >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tourButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cornerRadius="10dp"
+            android:layout_weight="1"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+            android:text="Schedule Tour"
+            android:textAllCaps="false"
+            android:textSize="15dp"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dealButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            app:cornerRadius="10dp"
+            style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+            android:layout_weight="1"
+            android:text="Book Now!"
+            android:textAllCaps="false"
+            android:textSize="15dp"/>
+    </LinearLayout>
 </LinearLayout>
 
 </ScrollView>

@@ -12,9 +12,9 @@
         android:icon="@drawable/ic_search"
         ></item>
     <item
-        android:id="@+id/myhome"
-        android:title="My Home"
-        android:icon="@drawable/ic_outline_add_home_work_24"
+        android:id="@+id/deals"
+        android:title="Deals"
+        android:icon="@drawable/ic_handshake_outline"
         ></item>
     <item
         android:id="@+id/tours"

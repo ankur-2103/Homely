@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.example.android.homely.Booking.BookNowActivity;
 import com.example.android.homely.Data.PropertyData;
 import com.example.android.homely.Tour.AddTourActivity;
 import com.google.android.material.button.MaterialButton;
@@ -39,7 +40,7 @@ public class PropertyProfile extends AppCompatActivity {
     private LinearLayout ownerinfo;
     private ImageView imageView;
     private ToggleButton like;
-    private MaterialButton tour, negotiate;
+    private MaterialButton tour, deal;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
     private FirebaseDatabase firebaseDatabase;
@@ -73,6 +74,7 @@ public class PropertyProfile extends AppCompatActivity {
         price2 = findViewById(R.id.price2);
         imageView = findViewById(R.id.imageView);
         tour = findViewById(R.id.tourButton);
+        deal = findViewById(R.id.dealButton);
         like = findViewById(R.id.likeToggle);
         ownerinfo = findViewById(R.id.ownerinfo);
         uname = findViewById(R.id.uname);
@@ -203,8 +205,19 @@ public class PropertyProfile extends AppCompatActivity {
                 Intent Tour = new Intent(PropertyProfile.this, AddTourActivity.class);
                 Tour.putExtra("propertyID", propertyID);
                 Tour.putExtra("propertyName", propertyData.getBuilding_name());
-                Tour.putExtra("propertyLoc", propertyData.getCity_name()+", "+propertyData.getState());
+                Tour.putExtra("propertyLoc", propertyData.getFaddress());
                 startActivity(Tour);
+            }
+        });
+
+        deal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent dealIntent = new Intent(PropertyProfile.this, BookNowActivity.class);
+                dealIntent.putExtra("propertyID", propertyID);
+                dealIntent.putExtra("propertyName", propertyData.getBuilding_name());
+                dealIntent.putExtra("propertyLoc", propertyData.getFaddress());
+                startActivity(dealIntent);
             }
         });
     }

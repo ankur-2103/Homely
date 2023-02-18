@@ -95,25 +95,38 @@
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/menu/menu_items.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur programs/Homely/app/src/main/res/menu/nav_menu.xml" value="0.25" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/drawable/ic_handshake.xml" value="0.2555" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/drawable/ic_handshake_outline.xml" value="0.121" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/drawable/ic_outline_account_circle_24_1.xml" value="0.2555" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/drawable/ic_search.xml" value="0.121" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_accept_tour.xml" value="0.264" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_admin_booking.xml" value="0.2359375" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_adminnav.xml" value="0.25" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_book_now.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_change_password.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_favorites.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_main2.xml" value="0.25" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_my_bookings.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_my_tour.xml" value="0.25" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_property.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_property_profile.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_search.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_tour.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_update_profile.xml" value="0.25" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/activity_usernav.xml" value="0.25" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/fragment_all_bookings.xml" value="0.25" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/fragment_bookings.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/fragment_notifications.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/fragment_profile.xml" value="0.46647230320699706" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/fragment_schedule_tour.xml" value="0.25" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/fragment_today_bookings.xml" value="0.2359375" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/fragment_today_tour.xml" value="0.25" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/fragment_tour_get_info.xml" value="0.24456521739130435" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/fragment_tours.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/fragment_verify_phone_number.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/home_property_item.xml" value="0.25" />
+        <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/my_bookings_item.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/my_property_item.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/tour_item.xml" value="0.25" />
         <entry key="..\:/Users/Swara Saumya/Desktop/ankur study/Homely/app/src/main/res/layout/tour_item_card.xml" value="0.264" />

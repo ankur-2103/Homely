@@ -23,20 +23,9 @@ public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourView
     private Context context;
     private ArrayList<TourData> list;
 
-    public boolean isExpandable() {
-        return expandable;
-    }
-
-    public void setExpandable(boolean expandable) {
-        this.expandable = expandable;
-    }
-
-    private boolean expandable;
-
     public MyTourAdapter(Context context, ArrayList<TourData> list) {
         this.context = context;
         this.list = list;
-        this.expandable = false;
     }
 
     @NonNull

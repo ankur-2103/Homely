@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.android.homely.Booking.BookingsFragment;
 import com.example.android.homely.Home.HomeFragment;
 import com.example.android.homely.MyHome.MyHomeFragment;
 import com.example.android.homely.Profile.ProfileFragment;
@@ -49,8 +50,8 @@ public class AdminNav extends AppCompatActivity {
                 case R.id.search:
                     replaceFragment(new MapsFragment());
                     break;
-                case R.id.myhome:
-                    replaceFragment(new MyHomeFragment());
+                case R.id.deals:
+                    replaceFragment(new BookingsFragment());
                     break;
                 case R.id.tours:
                     replaceFragment(new ToursFragment());
