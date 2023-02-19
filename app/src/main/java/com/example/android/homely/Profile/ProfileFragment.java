@@ -35,11 +35,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileFragment extends Fragment {
 
     private TextView name, email;
     private Button signout;
-    private ImageView imageView;
     private ProgressBar progressBar;
     private Uri ProfileUri;
     private FirebaseAuth auth;
@@ -50,6 +51,7 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference databaseReference;
     private Intent updateProfile, changePassword, favoritesI, tour, booking;
     private MaterialCardView uprofile, changepassword, favorites, tours, bookings;
+    private CircleImageView circleImageView;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -59,7 +61,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
-        imageView = view.findViewById(R.id.imageView2);
         progressBar = view.findViewById(R.id.progressBar);
         name = view.findViewById(R.id.name);
         email = view.findViewById(R.id.email);
@@ -70,6 +71,7 @@ public class ProfileFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         tours = view.findViewById(R.id.myTours);
         bookings = view.findViewById(R.id.myDeal);
+        circleImageView = view.findViewById(R.id.profileImg);
 
         user = auth.getCurrentUser();
 
@@ -85,7 +87,7 @@ public class ProfileFragment extends Fragment {
                     String e_mail = snapshot.child("email").getValue().toString();
                     if(snapshot.hasChild("profile_pic")){
                         ProfileUri = Uri.parse(snapshot.child("profile_pic").getValue().toString());
-                        Picasso.get().load(ProfileUri).into(imageView);
+                        Picasso.get().load(ProfileUri).into(circleImageView);
                     }
                     name.setText(full_name);
                     email.setText(e_mail);

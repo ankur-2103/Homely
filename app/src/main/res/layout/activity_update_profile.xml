@@ -27,40 +27,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        app:cardCornerRadius="132dp"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImg"
+        android:layout_width="132dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="25dp"
+        app:civ_border_color="@color/black"
+        app:civ_border_width="2dp"
+        android:src="@drawable/ic_undraw_pic_profile_re_1865"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile1"
-        android:id="@+id/imageView2"
-        android:layout_marginTop="40dp"
-        >
-        <ImageView
-            android:id="@+id/img"
-            android:layout_width="132dp"
-            android:layout_height="131dp"
-            android:src="@drawable/ic_undraw_pic_profile_re_1865"
-            tools:ignore="MissingConstraints" >
-        </ImageView>
-
-
-    </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
-
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_baseline_add_24"
-        android:elevation="1dp"
-        android:backgroundTint="#030303"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"></ImageView>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile1" />
 
     <Button
         android:id="@+id/save_button"
@@ -82,7 +59,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginRight="24dp"
         android:hint="Full Name"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/profileImg"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="34dp">
 

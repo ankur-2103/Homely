@@ -34,9 +34,13 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import com.theartofdev.edmodo.cropper.CropImage;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+
 public class UpdateProfile extends AppCompatActivity {
 
-    private ImageView imageView;
     private EditText Nfname, Nphone, Nemail;
     private Button save;
     private Uri filePath;
@@ -51,6 +55,7 @@ public class UpdateProfile extends AppCompatActivity {
     private String full_name, phone_no, e_mail;
     private boolean success = true;
     private ProgressBar progressBar;
+    private CircleImageView circleImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +65,7 @@ public class UpdateProfile extends AppCompatActivity {
         Nfname = findViewById(R.id.Nfname);
         Nphone = findViewById(R.id.Nphone);
         Nemail = findViewById(R.id.Nemail);
-        imageView = findViewById(R.id.img);
+        circleImageView = findViewById(R.id.profileImg);
         save = findViewById(R.id.save_button);
         progressBar = findViewById(R.id.progressBar);
         auth = FirebaseAuth.getInstance();
@@ -74,7 +79,7 @@ public class UpdateProfile extends AppCompatActivity {
         ProfileUri = user.getPhotoUrl();
 
         if (ProfileUri != null){
-            Picasso.get().load(ProfileUri).into(imageView);
+            Picasso.get().load(ProfileUri).into(circleImageView);
         }
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -100,7 +105,7 @@ public class UpdateProfile extends AppCompatActivity {
             }
         });
 
-        imageView.setOnClickListener(new View.OnClickListener() {
+        circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SelectImage();
@@ -136,24 +141,21 @@ public class UpdateProfile extends AppCompatActivity {
 
     private void SelectImage()
     {
-        Intent intent = new Intent();
-
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Image from here..."), PICK_IMAGE_REQUEST);
+        CropImage.activity().setAspectRatio(1,1).start(UpdateProfile.this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            filePath = data.getData();
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            filePath = result.getUri();
             try {
-                imageView.setImageURI(filePath);
+                Picasso.get().load(filePath).into(circleImageView);
+                Log.d("up123", "onActivityResult: "+filePath);
             }
             catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
@@ -203,7 +205,7 @@ public class UpdateProfile extends AppCompatActivity {
                         user.updateProfile(profileChangeRequest);
                         databaseReference.child("profile_pic").setValue(uri.toString());
                         ProfileUri = uri;
-                        imageView.setImageURI(ProfileUri);
+                        circleImageView.setImageURI(ProfileUri);
                     }
                 });
             }
