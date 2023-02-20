@@ -92,6 +92,7 @@ public class PropertyProfile extends AppCompatActivity {
             ownerinfo.setVisibility(View.VISIBLE);
             uinfo.setVisibility(View.VISIBLE);
             tour.setVisibility(View.GONE);
+            deal.setVisibility(View.GONE);
             DatabaseReference reference = firebaseDatabase.getReference("User/"+propertyData.getUserID());
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
