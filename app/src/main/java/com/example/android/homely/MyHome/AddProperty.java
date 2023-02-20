@@ -207,7 +207,7 @@ public class AddProperty extends AppCompatActivity implements PassDataInterface 
                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri1) {
-                            propertyData = new PropertyData(street_address, building_name, city_name, faddress,lat, lang, state, description, year_built, property, property_type, pincode, area_width, area_length, bedrooms, bathrooms, deposit, monthly_rent, uri1.toString(), FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            propertyData = new PropertyData(propertyID, street_address, building_name, city_name, faddress,lat, lang, state, description, year_built, property, property_type, pincode, area_width, area_length, bedrooms, bathrooms, deposit, monthly_rent, uri1.toString(), FirebaseAuth.getInstance().getCurrentUser().getUid());
                             databaseReference.setValue(propertyData);
                             userDatabaseReference.push().setValue(propertyID);
                         }

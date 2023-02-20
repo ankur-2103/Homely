@@ -40,6 +40,7 @@ public class AddTourActivity extends AppCompatActivity implements PassDataInterf
     private FirebaseUser user;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private String tourID = getTourID();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class AddTourActivity extends AppCompatActivity implements PassDataInterf
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Tour");
 
-        tourData = new TourData(propertyID, user.getUid(), propertyName, propertyLoc,"null","null","null","null","Pending","null","null","null","null","null");
+        tourData = new TourData(tourID,propertyID, user.getUid(), propertyName, propertyLoc,"null","null","null","null","Pending","null","null","null","null","null");
 
         loadFragment();
     }
@@ -110,11 +111,10 @@ public class AddTourActivity extends AppCompatActivity implements PassDataInterf
     }
 
     private void submitData() {
-        String tourId = getTourID();
-        databaseReference.child(tourId).setValue(tourData);
+        databaseReference.child(tourID).setValue(tourData);
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = firebaseDatabase.getReference("User/"+firebaseUser.getUid()+"/my_tour");
-        reference.push().setValue(tourId);
+        reference.push().setValue(tourID);
         Toast.makeText(this, "Tour Added Successfully", Toast.LENGTH_SHORT).show();
         finish();
     }

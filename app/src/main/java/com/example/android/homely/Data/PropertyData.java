@@ -6,9 +6,9 @@ import android.os.Parcelable;
 
 public class PropertyData implements Parcelable {
 
-    public String street_address, building_name, city_name, faddress, lat, lang, state, description, year_built, property, property_type, pincode, area_width, area_length, bedrooms, bathrooms, deposit, monthly_rent, furi, userID;
+    public String propertyID, street_address, building_name, city_name, faddress, lat, lang, state, description, year_built, property, property_type, pincode, area_width, area_length, bedrooms, bathrooms, deposit, monthly_rent, furi, userID;
 
-    public PropertyData(String street_address,String building_name,String city_name, String faddress,String lat,String lang,String state,String description,String year_built,String property,String property_type,String pincode,String area_width,String area_length,String bedrooms,String bathrooms,String deposit,String monthly_rent,String furi, String userID){
+    public PropertyData(String propertyID,String street_address,String building_name,String city_name, String faddress,String lat,String lang,String state,String description,String year_built,String property,String property_type,String pincode,String area_width,String area_length,String bedrooms,String bathrooms,String deposit,String monthly_rent,String furi, String userID){
         this.building_name = building_name;
         this.street_address = street_address;
         this.city_name = city_name;
@@ -29,6 +29,7 @@ public class PropertyData implements Parcelable {
         this.lang = lang;
         this.lat = lat;
         this.userID = userID;
+        this.propertyID = propertyID;
     }
 
     public PropertyData() {
@@ -55,6 +56,7 @@ public class PropertyData implements Parcelable {
         monthly_rent = in.readString();
         furi = in.readString();
         userID = in.readString();
+        propertyID = in.readString();
     }
 
     @Override
@@ -79,6 +81,7 @@ public class PropertyData implements Parcelable {
         dest.writeString(monthly_rent);
         dest.writeString(furi);
         dest.writeString(userID);
+        dest.writeString(propertyID);
     }
 
     @Override

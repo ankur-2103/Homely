@@ -19,10 +19,11 @@ public class TourData implements Parcelable {
     public String agentEmail;
     public String description;
     public String feedback;
+    public String tourID;
 
     public TourData() {}
 
-    public TourData(String propertyID, String userID, String propertyName, String propertyLoc, String tourType, String tourDate, String tourTime, String virtualType, String status, String agentName, String agentPhoneNumber, String agentEmail, String description, String feedback) {
+    public TourData(String tourID, String propertyID, String userID, String propertyName, String propertyLoc, String tourType, String tourDate, String tourTime, String virtualType, String status, String agentName, String agentPhoneNumber, String agentEmail, String description, String feedback) {
         this.propertyID = propertyID;
         this.userID = userID;
         this.propertyName = propertyName;
@@ -37,6 +38,7 @@ public class TourData implements Parcelable {
         this.agentEmail = agentEmail;
         this.description = description;
         this.feedback = feedback;
+        this.tourID = tourID;
     }
 
     protected TourData(Parcel in) {
@@ -54,6 +56,7 @@ public class TourData implements Parcelable {
         agentEmail = in.readString();
         description = in.readString();
         feedback = in.readString();
+        tourID = in.readString();
     }
 
     public static final Creator<TourData> CREATOR = new Creator<TourData>() {
@@ -145,5 +148,6 @@ public class TourData implements Parcelable {
         parcel.writeString(agentEmail);
         parcel.writeString(description);
         parcel.writeString(feedback);
+        parcel.writeString(tourID);
     }
 }
