@@ -62,7 +62,6 @@ public class Favorites extends AppCompatActivity {
             public void onItemClick(PropertyData propertyData, int position) {
                 Intent property = new Intent(Favorites.this, PropertyProfile.class);
                 property.putExtra("propertyData", propertyData);
-                property.putExtra("propertyID", currPropIDList.get(position));
                 startActivity(property);
             }
         });

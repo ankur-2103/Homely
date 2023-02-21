@@ -69,7 +69,6 @@ public class SearchActivity extends AppCompatActivity implements PassDataInterfa
             public void onItemClick(PropertyData propertyData, int pos) {
                 Intent property = new Intent(SearchActivity.this, PropertyProfile.class);
                 property.putExtra("propertyData", propertyData);
-                property.putExtra("propertyID", currPropIDList.get(pos));
                 startActivity(property);
                 Log.w("onclick", "yes");
             }

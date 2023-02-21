@@ -57,7 +57,7 @@ public class PropertyProfile extends AppCompatActivity {
         setContentView(R.layout.activity_property_profile);
 
         propertyData = (PropertyData) getIntent().getParcelableExtra("propertyData");
-        propertyID = (String) getIntent().getStringExtra("propertyID");
+        propertyID = propertyData.getPropertyID();
 
         sharedPreferences = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         isAdmin = sharedPreferences.getBoolean("isAdmin", false);

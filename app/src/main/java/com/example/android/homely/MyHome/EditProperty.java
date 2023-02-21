@@ -82,7 +82,7 @@ public class EditProperty extends AppCompatActivity implements PassDataInterface
         add_property_step4 = add_property_step4.newInstance(EditProperty.this);
 
         propertyData = (PropertyData) getIntent().getParcelableExtra("propertyData");
-        propertyID = (String) getIntent().getStringExtra("propertyID");
+        propertyID = propertyData.getPropertyID();
 
         bundle = new Bundle();
         bundle.putParcelable("propertyData", propertyData);

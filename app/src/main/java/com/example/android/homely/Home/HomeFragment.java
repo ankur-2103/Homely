@@ -88,7 +88,6 @@ public class HomeFragment extends Fragment {
             public void onItemClick(PropertyData propertyData, int pos) {
                 Intent property = new Intent(getContext(), PropertyProfile.class);
                 property.putExtra("propertyData", propertyData);
-                property.putExtra("propertyID", currPropIDList.get(pos));
                 startActivity(property);
                 Log.w("onclick", "yes");
             }

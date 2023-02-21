@@ -6,6 +6,14 @@ import android.os.Parcelable;
 
 public class PropertyData implements Parcelable {
 
+    public String getPropertyID() {
+        return propertyID;
+    }
+
+    public void setPropertyID(String propertyID) {
+        this.propertyID = propertyID;
+    }
+
     public String propertyID, street_address, building_name, city_name, faddress, lat, lang, state, description, year_built, property, property_type, pincode, area_width, area_length, bedrooms, bathrooms, deposit, monthly_rent, furi, userID;
 
     public PropertyData(String propertyID,String street_address,String building_name,String city_name, String faddress,String lat,String lang,String state,String description,String year_built,String property,String property_type,String pincode,String area_width,String area_length,String bedrooms,String bathrooms,String deposit,String monthly_rent,String furi, String userID){

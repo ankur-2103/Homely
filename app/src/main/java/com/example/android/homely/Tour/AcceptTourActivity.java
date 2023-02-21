@@ -79,7 +79,7 @@ public class AcceptTourActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         tourData = (TourData) getIntent().getParcelableExtra("tourData");
-        tourId = (String) getIntent().getStringExtra("tourId");
+        tourId = tourData.getTourID();
         reference = firebaseDatabase.getReference("Token/"+tourData.getUserID());
 
         reference.addValueEventListener(new ValueEventListener() {

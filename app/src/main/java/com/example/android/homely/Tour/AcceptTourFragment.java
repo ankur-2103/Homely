@@ -62,7 +62,6 @@ public class AcceptTourFragment extends Fragment {
             public void onItemClick(TourData tourData, int position) {
                 Intent tourAccept = new Intent(getContext(), AcceptTourActivity.class);
                 tourAccept.putExtra("tourData", tourData);
-                tourAccept.putExtra("tourId", tourIdArrayList.get(position));
                 startActivity(tourAccept);
             }
         });

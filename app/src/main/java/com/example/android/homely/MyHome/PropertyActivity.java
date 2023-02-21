@@ -40,8 +40,7 @@ public class PropertyActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private FirebaseStorage storage;
     private StorageReference storageReference;
-    private DatabaseReference propertyFirebaseDatabase;
-    private DatabaseReference databaseReference;
+    private DatabaseReference propertyFirebaseDatabase, databaseReference, tourReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,7 @@ public class PropertyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_property);
 
         propertyData = (PropertyData) getIntent().getParcelableExtra("propertyData");
-        propertyID = (String) getIntent().getStringExtra("propertyID");
+        propertyID = propertyData.getPropertyID();
 
         bname = findViewById(R.id.bname);
         saddress = findViewById(R.id.streetAddress);
@@ -69,6 +68,7 @@ public class PropertyActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("User/"+user.getUid()+"/my_property");
         propertyFirebaseDatabase = firebaseDatabase.getReference("Property");
+        tourReference = firebaseDatabase.getReference("Tour");
         storage = FirebaseStorage.getInstance();
 
         Uri uri = Uri.parse(propertyData.getFuri());
@@ -109,48 +109,29 @@ public class PropertyActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseReference.orderByValue().equalTo(propertyID).addValueEventListener(new ValueEventListener() {
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.getValue()!=null){
-                            for (DataSnapshot i : snapshot.getChildren()){
-                                databaseReference.child(i.getKey()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()){
-                                            Toast.makeText(PropertyActivity.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
-                                        }else{
-                                            Toast.makeText(PropertyActivity.this, "Failed to Delete property", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-
-                                propertyFirebaseDatabase.child(i.getValue().toString()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()){
-                                            Toast.makeText(PropertyActivity.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
-                                        }else{
-                                            Toast.makeText(PropertyActivity.this, "Failed to Delete property", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-
-                                storageReference = storage.getReference("Property/"+propertyID+"/propertyPic.jpg");
-                                storageReference.delete();
-
-                                finish();
+                        if(snapshot.getValue()!=null){
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                if(propertyID.equals(dataSnapshot.getValue())){
+                                    databaseReference.child(dataSnapshot.getKey()).removeValue();
+                                }
                             }
                         }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
 
-                databaseReference = firebaseDatabase.getReference("Tour");
-                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                propertyFirebaseDatabase.child(propertyID).removeValue();
+                storageReference = storage.getReference("Property/"+propertyID+"/propertyPic.jpg");
+                storageReference.delete();
+
+                tourReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for(DataSnapshot dataSnapshot : snapshot.getChildren()){
@@ -165,8 +146,9 @@ public class PropertyActivity extends AppCompatActivity {
 
                     }
                 });
+
+                finish();
             }
         });
-
     }
 }

@@ -19,6 +19,11 @@ public class TourData implements Parcelable {
     public String agentEmail;
     public String description;
     public String feedback;
+
+    public String getTourID() {
+        return tourID;
+    }
+
     public String tourID;
 
     public TourData() {}
