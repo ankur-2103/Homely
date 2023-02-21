@@ -2,7 +2,9 @@ package com.example.android.homely.Profile;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -52,6 +54,8 @@ public class ProfileFragment extends Fragment {
     private Intent updateProfile, changePassword, favoritesI, tour, booking;
     private MaterialCardView uprofile, changepassword, favorites, tours, bookings;
     private CircleImageView circleImageView;
+    private SharedPreferences sharedPreferences;
+    private boolean isAdmin = false;
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -77,6 +81,14 @@ public class ProfileFragment extends Fragment {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("User/"+user.getUid());
+
+        sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        isAdmin = sharedPreferences.getBoolean("isAdmin", false);
+
+        if(isAdmin){
+            tours.setVisibility(View.GONE);
+            bookings.setVisibility(View.GONE);
+        }
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
