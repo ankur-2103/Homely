@@ -83,15 +83,7 @@ public class HomeFragment extends Fragment {
         currPropIDList = new ArrayList<>();
 
 
-        homeAdapter = new HomeAdapter(getContext(), propertyDataList, new HomeAdapter.ItemClickListener() {
-            @Override
-            public void onItemClick(PropertyData propertyData, int pos) {
-                Intent property = new Intent(getContext(), PropertyProfile.class);
-                property.putExtra("propertyData", propertyData);
-                startActivity(property);
-                Log.w("onclick", "yes");
-            }
-        });
+        homeAdapter = new HomeAdapter(getContext(), propertyDataList);
         recyclerView.setAdapter(homeAdapter);
 
         searchTxt.addTextChangedListener(new TextWatcher() {

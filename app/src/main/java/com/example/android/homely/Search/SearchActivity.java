@@ -64,15 +64,7 @@ public class SearchActivity extends AppCompatActivity implements PassDataInterfa
         mypropIDList = new ArrayList<String>();
         currPropIDList = new ArrayList<String>();
 
-        searchAdapter = new SearchAdapter(SearchActivity.this, propertyDataList, new SearchAdapter.ItemClickListener() {
-            @Override
-            public void onItemClick(PropertyData propertyData, int pos) {
-                Intent property = new Intent(SearchActivity.this, PropertyProfile.class);
-                property.putExtra("propertyData", propertyData);
-                startActivity(property);
-                Log.w("onclick", "yes");
-            }
-        });
+        searchAdapter = new SearchAdapter(SearchActivity.this, propertyDataList);
         recyclerView.setAdapter(searchAdapter);
 
 

@@ -2,6 +2,7 @@ package com.example.android.homely.Search;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +16,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.homely.PropertyProfile;
 import com.example.android.homely.R;
 import com.example.android.homely.Data.FilterData;
 import com.example.android.homely.Data.PropertyData;
+import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -27,14 +30,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     private Context context;
     private ArrayList<PropertyData> propertyDataList;
     private ArrayList<PropertyData> propertyDataListAll;
-    private SearchAdapter.ItemClickListener itemClickListener;
     private FilterData filterData;
 
-    public SearchAdapter(Context context, ArrayList<PropertyData> propertyDataList, SearchAdapter.ItemClickListener itemClickListener) {
+    public SearchAdapter(Context context, ArrayList<PropertyData> propertyDataList) {
         this.context = context;
         this.propertyDataList = propertyDataList;
         this.propertyDataListAll = propertyDataList;
-        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -60,10 +61,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             Log.e("pic", "onBindViewHolder: "+e.toString());
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemClickListener.onItemClick(propertyDataList.get(position), position);
+                Intent intent = new Intent(context, PropertyProfile.class);
+                intent.putExtra("propertyData", propertyData);
+                context.startActivity(intent);
             }
         });
     }
@@ -105,13 +108,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         }
     };
 
-    public interface ItemClickListener{
-        void onItemClick(PropertyData propertyData, int position);
-    }
-
     public class SearchViewholder extends RecyclerView.ViewHolder {
         TextView bname, bath, bed, area, price;
         ImageView imageView;
+        MaterialCardView cardView;
         public SearchViewholder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
@@ -120,6 +120,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             bath = itemView.findViewById(R.id.bath);
             area = itemView.findViewById(R.id.area);
             price = itemView.findViewById(R.id.price);
+            cardView = itemView.findViewById(R.id.myPropertyInfo);
         }
     }
 

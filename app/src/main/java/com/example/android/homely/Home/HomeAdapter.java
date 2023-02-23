@@ -2,6 +2,7 @@ package com.example.android.homely.Home;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,8 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import com.example.android.homely.PropertyProfile;
 import com.example.android.homely.R;
 import com.example.android.homely.Data.PropertyData;
+import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -27,13 +30,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     private Context context;
     private ArrayList<PropertyData> propertyDataList;
     private ArrayList<PropertyData> propertyDataListAll;
-    private ItemClickListener itemClickListener;
 
-    public HomeAdapter(Context context, ArrayList<PropertyData> propertyDataList, HomeAdapter.ItemClickListener itemClickListener){
+    public HomeAdapter(Context context, ArrayList<PropertyData> propertyDataList){
         this.context = context;
         this.propertyDataList = propertyDataList;
         this.propertyDataListAll = propertyDataList;
-        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -57,10 +58,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             Log.e("pic", "onBindViewHolder: "+e.toString());
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemClickListener.onItemClick(propertyDataList.get(position), position);
+                Intent intent = new Intent(context, PropertyProfile.class);
+                intent.putExtra("propertyData", propertyData);
+                context.startActivity(intent);
             }
         });
     }
@@ -102,19 +105,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         }
     };
 
-    public interface ItemClickListener{
-        void onItemClick(PropertyData propertyData, int position);
-    }
-
     public class HomeViewHolder extends ViewHolder {
         TextView bname, propertyLoc,price;
         ImageView imageView;
+        MaterialCardView cardView;
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
             bname = itemView.findViewById(R.id.bname);
             propertyLoc = itemView.findViewById(R.id.propertyLoc);
             price = itemView.findViewById(R.id.price);
+            cardView = itemView.findViewById(R.id.homeCardInfo);
         }
     }
 }

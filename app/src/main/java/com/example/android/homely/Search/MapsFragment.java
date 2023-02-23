@@ -66,15 +66,23 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMarkerClickLis
         public void onMapReady(@NonNull GoogleMap googleMap) {
             LatLng latLng;
             if(currentLocation!=null){
-                latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                googleMap.addMarker(new MarkerOptions().position(latLng).title("Current Location"));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+                try {
+                    latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                    googleMap.addMarker(new MarkerOptions().position(latLng).title("Current Location"));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+                }catch (Exception e){
+
+                }
             }
             if(!list.isEmpty()){
                 for (ArrayMap.Entry<String, PropertyData> arrayMap: list.entrySet()){
-                    latLng = new LatLng(Double.parseDouble(arrayMap.getValue().getLat()), Double.parseDouble(arrayMap.getValue().getLang()));
-                    googleMap.addMarker(new MarkerOptions().position(latLng).title(arrayMap.getValue().getBuilding_name())).setTag(arrayMap.getKey());
+                    try {
+                        latLng = new LatLng(Double.parseDouble(arrayMap.getValue().getLat()), Double.parseDouble(arrayMap.getValue().getLang()));
+                        googleMap.addMarker(new MarkerOptions().position(latLng).title(arrayMap.getValue().getBuilding_name())).setTag(arrayMap.getKey());
+                    }catch (Exception e){
+
+                    }
                 }
             }
 
