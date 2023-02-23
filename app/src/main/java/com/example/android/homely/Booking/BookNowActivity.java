@@ -1,43 +1,61 @@
 package com.example.android.homely.Booking;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.android.homely.Data.DealData;
 import com.example.android.homely.Data.PropertyData;
 import com.example.android.homely.R;
+import com.example.android.homely.SendNotification.APIService;
+import com.example.android.homely.SendNotification.Client;
+import com.example.android.homely.SendNotification.Data;
+import com.example.android.homely.SendNotification.MyResponse;
+import com.example.android.homely.SendNotification.NotificationSender;
+import com.example.android.homely.Tour.AddTourActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class BookNowActivity extends AppCompatActivity {
 
     private RadioGroup  dealDateRadioGrp, dealTimeRadioGrp;
     private MaterialButton button;
     private MaterialRadioButton dealDateButton, dealTimeButton;
-    private String dealDate, dealTime, propertyID, propertyName, propertyLoc, dealID;
+    private String dealDate, dealTime, propertyID, propertyName, propertyLoc, dealID, adminToken;
     private DealData dealData;
     private PropertyData propertyData;
     private FirebaseUser user;
-    private DatabaseReference databaseReference, userRef;
+    private DatabaseReference databaseReference, userRef, reference;
+    private APIService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_now);
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
         dealDateRadioGrp = findViewById(R.id.dealDateRadioGrp);
         dealTimeRadioGrp = findViewById(R.id.dealTimeRadioGrp);
@@ -50,6 +68,21 @@ public class BookNowActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Deals");
         userRef = FirebaseDatabase.getInstance().getReference("User/"+user.getUid()+"/my_deals");
+        reference = FirebaseDatabase.getInstance().getReference("Token/NzlFcIpQ1ra6QEaHS4BNscAGYNN2");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot!=null){
+                    adminToken =  snapshot.child("token").getValue().toString();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         dealDateRadioGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -134,7 +167,8 @@ public class BookNowActivity extends AppCompatActivity {
         dealData = new DealData(dealID, dealDate, dealTime, user.getUid(), propertyID, propertyLoc, propertyName, "Pending");
         databaseReference.child(dealID).setValue(dealData);
         userRef.push().setValue(dealID);
-        finish();
+        Toast.makeText(this, "Deal Added Successfully", Toast.LENGTH_SHORT).show();
+        sendNotification("New Deal", "New deal arrived has for "+dealData.getPropertyName()+"!");
     }
 
     private String getDealID() {
@@ -147,5 +181,25 @@ public class BookNowActivity extends AppCompatActivity {
         String id= dt+tm;
         System.out.println(id);
         return id;
+    }
+
+    private void sendNotification(String title, String message) {
+        Data data = new Data(title, message);
+        NotificationSender notificationSender = new NotificationSender(data, adminToken);
+        apiService.sendNotification(notificationSender).enqueue(new Callback<MyResponse>() {
+            @Override
+            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                Log.d("respo", "onResponse: "+response.body().success);
+                if(response.code()==200 && response.body().success!=1){
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyResponse> call, Throwable t) {
+                Log.d("gfg1", "onFailure: "+t);
+                Toast.makeText(BookNowActivity.this, "Deal Request Failed!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        finish();
     }
 }
