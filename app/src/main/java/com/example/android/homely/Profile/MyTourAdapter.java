@@ -2,6 +2,7 @@ package com.example.android.homely.Profile;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.homely.Data.PropertyData;
 import com.example.android.homely.Data.TourData;
+import com.example.android.homely.PropertyProfile;
 import com.example.android.homely.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +35,7 @@ public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourView
     private Context context;
     private ArrayList<TourData> list;
     private ArrayList<TourData>listAll;
-    private DatabaseReference user, tours;
+    private DatabaseReference user, tours, property;
     private FirebaseUser firebaseUser;
 
     public MyTourAdapter(Context context, ArrayList<TourData> list) {
@@ -70,6 +72,13 @@ public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourView
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(holder.viewProperty.getVisibility()==View.GONE){
+                    holder.viewProperty.setVisibility(View.VISIBLE);
+                }else{
+                    holder.viewProperty.setVisibility(View.GONE);
+                }
+
                 if(tourData.getStatus().equals("Accepted") && holder.guide.getVisibility()==View.GONE){
                     holder.guide.setVisibility(View.VISIBLE);
                     if (holder.description.getVisibility()==View.GONE && !tourData.getDescription().equals("null")){
@@ -91,6 +100,7 @@ public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourView
             @Override
             public void onClick(View view) {
                 holder.cancelTour.setVisibility(View.GONE);
+                holder.viewProperty.setVisibility(View.GONE);
                 list.remove(holder.getAdapterPosition());
                 tours.child(tourData.getTourID()).removeValue();
                 user.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -103,6 +113,29 @@ public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourView
                                     notifyDataSetChanged();
                                 }
                             }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
+        holder.viewProperty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                property = FirebaseDatabase.getInstance().getReference("Property/"+tourData.getPropertyID());
+                property.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.getValue()!=null){
+                            PropertyData propertyData = snapshot.getValue(PropertyData.class);
+                            Intent intent = new Intent(context, PropertyProfile.class);
+                            intent.putExtra("propertyData",propertyData);
+                            context.startActivity(intent);
                         }
                     }
 
@@ -155,7 +188,7 @@ public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourView
     public class MyTourViewHolder extends RecyclerView.ViewHolder {
         TextView tbname, tdate, ttime, tstatus, gname, gphone, gemail, desc;
         LinearLayout guide, description, card;
-        MaterialButton cancelTour;
+        MaterialButton cancelTour, viewProperty;
         public MyTourViewHolder(@NonNull View itemView) {
             super(itemView);
             tbname = itemView.findViewById(R.id.tbname);
@@ -170,6 +203,7 @@ public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourView
             description = itemView.findViewById(R.id.description1);
             card = itemView.findViewById(R.id.tourCard);
             cancelTour = itemView.findViewById(R.id.cancelTour);
+            viewProperty = itemView.findViewById(R.id.viewProperty);
         }
     }
 }

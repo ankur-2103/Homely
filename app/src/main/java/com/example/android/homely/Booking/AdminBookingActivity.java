@@ -3,6 +3,7 @@ package com.example.android.homely.Booking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.homely.Data.DealData;
+import com.example.android.homely.Data.PropertyData;
 import com.example.android.homely.Data.TourData;
+import com.example.android.homely.PropertyProfile;
 import com.example.android.homely.R;
 import com.example.android.homely.SendNotification.APIService;
 import com.example.android.homely.SendNotification.Client;
@@ -46,7 +49,7 @@ public class AdminBookingActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser user;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference, ownerRef, customerRef, propertyRef;
+    private DatabaseReference databaseReference, ownerRef, customerRef, propertyRef, propertyInfo;
     private DatabaseReference reference;
     private MaterialCardView materialCardView;
     private APIService apiService;
@@ -168,6 +171,29 @@ public class AdminBookingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 cnacel();
+            }
+        });
+
+        materialCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                propertyInfo = firebaseDatabase.getReference("Property/"+dealData.getPropertyID());
+                propertyInfo.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.getValue()!=null){
+                            PropertyData propertyData = snapshot.getValue(PropertyData.class);
+                            Intent intent = new Intent(AdminBookingActivity.this, PropertyProfile.class);
+                            intent.putExtra("propertyData",propertyData);
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
 

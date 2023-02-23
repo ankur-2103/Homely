@@ -198,6 +198,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/viewProperty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    app:cornerRadius="15dp"
+                    style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+                    app:strokeWidth="1dp"
+                    android:text="View Property"
+                    android:textAllCaps="false"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/cancelTour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

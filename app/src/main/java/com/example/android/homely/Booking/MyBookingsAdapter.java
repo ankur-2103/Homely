@@ -1,6 +1,7 @@
 package com.example.android.homely.Booking;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.homely.Data.DealData;
+import com.example.android.homely.Data.PropertyData;
 import com.example.android.homely.Data.TourData;
 import com.example.android.homely.Profile.MyTourAdapter;
+import com.example.android.homely.PropertyProfile;
 import com.example.android.homely.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,7 +34,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
 
     private Context context;
     private ArrayList<DealData> list, listAll;
-    private DatabaseReference user, deals;
+    private DatabaseReference user, deals, property;
     private FirebaseUser firebaseUser;
 
     public MyBookingsAdapter(Context context, ArrayList<DealData> list) {
@@ -66,6 +69,12 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
                 }else{
                     holder.cancelDeal.setVisibility(View.GONE);
                 }
+
+                if(holder.viewProperty.getVisibility()==View.GONE){
+                    holder.viewProperty.setVisibility(View.VISIBLE);
+                }else{
+                    holder.viewProperty.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -73,6 +82,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
             @Override
             public void onClick(View view) {
                 holder.cancelDeal.setVisibility(View.GONE);
+                holder.viewProperty.setVisibility(View.GONE);
                 list.remove(holder.getAdapterPosition());
                 deals.child(dealData.getDealID()).removeValue();
                 user.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -95,6 +105,30 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
                 });
             }
         });
+
+        holder.viewProperty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                property = FirebaseDatabase.getInstance().getReference("Property/"+dealData.getPropertyID());
+                property.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.getValue()!=null){
+                            PropertyData propertyData = snapshot.getValue(PropertyData.class);
+                            Intent intent = new Intent(context, PropertyProfile.class);
+                            intent.putExtra("propertyData",propertyData);
+                            context.startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+
     }
 
     @Override
@@ -136,7 +170,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
 
     public class MyBookingsViewHolder extends RecyclerView.ViewHolder {
         TextView dbname, ddate, dtime, dstatus;
-        MaterialButton cancelDeal;
+        MaterialButton cancelDeal, viewProperty;
         LinearLayout bookingCard;
         public MyBookingsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -146,6 +180,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
             dstatus = itemView.findViewById(R.id.dstatusTxt);
             cancelDeal = itemView.findViewById(R.id.cancelDeal);
             bookingCard = itemView.findViewById(R.id.bookingCard);
+            viewProperty = itemView.findViewById(R.id.viewProperty);
         }
     }
 }
