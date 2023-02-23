@@ -6,8 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.homely.Data.DealData;
@@ -38,6 +42,8 @@ public class MyBookingsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MyBookingsAdapter myBookingsAdapter;
     private TextView textView;
+    private ImageView searchImg;
+    private EditText search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,8 @@ public class MyBookingsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.bookings_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         textView = findViewById(R.id.textNo);
+        searchImg = findViewById(R.id.bookings_search_button);
+        search = findViewById(R.id.bookings_search_txt);
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
@@ -81,6 +89,23 @@ public class MyBookingsActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                myBookingsAdapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
 
             }
         });

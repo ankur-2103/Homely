@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,14 +20,16 @@ import com.example.android.homely.R;
 
 import java.util.ArrayList;
 
-public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourViewHolder>{
+public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourViewHolder> implements Filterable {
 
     private Context context;
     private ArrayList<TourData> list;
+    private ArrayList<TourData>listAll;
 
     public MyTourAdapter(Context context, ArrayList<TourData> list) {
         this.context = context;
         this.list = list;
+        this.listAll = list;
     }
 
     @NonNull
@@ -75,6 +79,38 @@ public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourView
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    private Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            ArrayList<TourData> result = new ArrayList<TourData>();
+
+            if (charSequence.toString().isEmpty()){
+                result = listAll;
+            }else{
+                for (TourData tourData : listAll){
+                    if(tourData.getPropertyLoc().toLowerCase().contains(charSequence.toString().toLowerCase())){
+                        result.add(tourData);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = result;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            list = (ArrayList<TourData>) filterResults.values;
+            notifyDataSetChanged();
+        }
+    };
+
+    @Override
+    public Filter getFilter() {
+        return filter;
     }
 
     public class MyTourViewHolder extends RecyclerView.ViewHolder {

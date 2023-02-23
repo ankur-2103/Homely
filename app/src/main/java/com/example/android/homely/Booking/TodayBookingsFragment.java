@@ -7,16 +7,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.homely.Data.DealData;
-import com.example.android.homely.Data.TourData;
 import com.example.android.homely.R;
-import com.example.android.homely.Tour.PendingTourAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,13 +37,14 @@ public class TodayBookingsFragment extends Fragment {
     private DatabaseReference databaseReference;
     private ArrayList<DealData> dealDataArrayList;
     private ArrayList<String> dealIdArrayList;
-    private PendingTourAdapter pendingDealAdapter;
     private Calendar calendar = Calendar.getInstance();
     private Calendar calendar2 = Calendar.getInstance();
     private SimpleDateFormat dateformat = new SimpleDateFormat("EEE, MMM dd yyyy");
     private SimpleDateFormat timeformate = new SimpleDateFormat("hh:mm aa");
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd yyyy hh:mm aa");
     private TextView textView;
+    private ImageView searchImg;
+    private EditText search;
 
     public TodayBookingsFragment() {}
 
@@ -56,6 +59,8 @@ public class TodayBookingsFragment extends Fragment {
        recyclerView = view.findViewById(R.id.tbrecyclerView);
        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
        textView = view.findViewById(R.id.textNo);
+       searchImg = view.findViewById(R.id.tbsearch_button);
+       search = view.findViewById(R.id.tbsearch_txt);
 
        AdminBookingsAdapter adminBookingsAdapter = new AdminBookingsAdapter(getContext(), dealDataArrayList);
        recyclerView.setAdapter(adminBookingsAdapter);
@@ -105,6 +110,23 @@ public class TodayBookingsFragment extends Fragment {
 
            @Override
            public void onCancelled(@NonNull DatabaseError error) {
+
+           }
+       });
+
+       search.addTextChangedListener(new TextWatcher() {
+           @Override
+           public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+           }
+
+           @Override
+           public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                adminBookingsAdapter.getFilter().filter(charSequence);
+           }
+
+           @Override
+           public void afterTextChanged(Editable editable) {
 
            }
        });

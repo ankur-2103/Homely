@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,16 +27,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.MyBookingsViewHolder>{
+public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.MyBookingsViewHolder> implements Filterable {
 
     private Context context;
-    private ArrayList<DealData> list;
+    private ArrayList<DealData> list, listAll;
     private DatabaseReference user, deals;
     private FirebaseUser firebaseUser;
 
     public MyBookingsAdapter(Context context, ArrayList<DealData> list) {
         this.context = context;
         this.list = list;
+        this.listAll = list;
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         user = FirebaseDatabase.getInstance().getReference("User/"+firebaseUser.getUid()+"/my_deals");
         deals = FirebaseDatabase.getInstance().getReference("Deals");
@@ -91,12 +94,43 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
                 });
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    private Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            ArrayList<DealData> result = new ArrayList<DealData>();
+
+            if (charSequence.toString().isEmpty()){
+                result = listAll;
+            }else {
+                for (DealData dealData : listAll){
+                    if(dealData.getPropertyAddress().toLowerCase().contains(charSequence.toString().toLowerCase())){
+                        result.add(dealData);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = result;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            list = (ArrayList<DealData>) filterResults.values;
+            notifyDataSetChanged();
+        }
+    };
+
+    @Override
+    public Filter getFilter() {
+        return filter;
     }
 
     public class MyBookingsViewHolder extends RecyclerView.ViewHolder {

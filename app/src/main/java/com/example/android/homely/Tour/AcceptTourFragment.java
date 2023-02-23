@@ -8,16 +8,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.homely.Data.PropertyData;
 import com.example.android.homely.Data.TourData;
-import com.example.android.homely.Home.HomeAdapter;
-import com.example.android.homely.PropertyProfile;
 import com.example.android.homely.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +26,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,13 +37,15 @@ public class AcceptTourFragment extends Fragment {
     private DatabaseReference databaseReference;
     private ArrayList<TourData> tourDataArrayList;
     private ArrayList<String> tourIdArrayList;
-    private PendingTourAdapter pendingTourAdapter;
+    private AdminTourAdapter adminTourAdapter;
     private Calendar calendar = Calendar.getInstance();
     private Calendar calendar2 = Calendar.getInstance();
     private SimpleDateFormat dateformat = new SimpleDateFormat("EEE, MMM dd yyyy");
     private SimpleDateFormat timeformate = new SimpleDateFormat("hh:mm aa");
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd yyyy hh:mm aa");
     private TextView textView;
+    private ImageView searchImg;
+    private EditText search;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,8 +58,10 @@ public class AcceptTourFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         textView = view.findViewById(R.id.textNo);
+        searchImg = view.findViewById(R.id.ttsearch_button);
+        search = view.findViewById(R.id.ttsearch_txt);
 
-        pendingTourAdapter = new PendingTourAdapter(getContext(), tourDataArrayList, new PendingTourAdapter.ItemClickListener() {
+        adminTourAdapter = new AdminTourAdapter(getContext(), tourDataArrayList, new AdminTourAdapter.ItemClickListener() {
             @Override
             public void onItemClick(TourData tourData, int position) {
                 Intent tourAccept = new Intent(getContext(), AcceptTourActivity.class);
@@ -65,7 +69,7 @@ public class AcceptTourFragment extends Fragment {
                 startActivity(tourAccept);
             }
         });
-        recyclerView.setAdapter(pendingTourAdapter);
+        recyclerView.setAdapter(adminTourAdapter);
 
         databaseReference.orderByChild("status").equalTo("Pending").addValueEventListener(new ValueEventListener() {
             @Override
@@ -109,11 +113,28 @@ public class AcceptTourFragment extends Fragment {
                     textView.setVisibility(View.GONE);
                 }
 
-                pendingTourAdapter.notifyDataSetChanged();
+                adminTourAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                adminTourAdapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
 
             }
         });
