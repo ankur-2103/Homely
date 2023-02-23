@@ -58,8 +58,8 @@ public class AcceptTourFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         textView = view.findViewById(R.id.textNo);
-        searchImg = view.findViewById(R.id.ttsearch_button);
-        search = view.findViewById(R.id.ttsearch_txt);
+        searchImg = view.findViewById(R.id.atsearch_button);
+        search = view.findViewById(R.id.atsearch_txt);
 
         adminTourAdapter = new AdminTourAdapter(getContext(), tourDataArrayList, new AdminTourAdapter.ItemClickListener() {
             @Override

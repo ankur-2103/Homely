@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,18 +39,19 @@ import retrofit2.Response;
 public class AdminBookingActivity extends AppCompatActivity {
 
     private DealData dealData;
-    private TextView ptxt, ploc, dateTxt, timeTxt, statusTxt;
+    private TextView ptxt, ploc, dateTxt, timeTxt, statusTxt, uname, uemail, uphone, cname, cemail, cphone;
     private MaterialButton confirmButton, cancelButton;
     private TextInputEditText amountTxt;
     private String amount;
     private FirebaseAuth auth;
     private FirebaseUser user;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, ownerRef, customerRef, propertyRef;
     private DatabaseReference reference;
     private MaterialCardView materialCardView;
     private APIService apiService;
     private String userToken;
+    private LinearLayout owner, customer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,14 @@ public class AdminBookingActivity extends AppCompatActivity {
         confirmButton = findViewById(R.id.confirmButton);
         cancelButton = findViewById(R.id.cancelButton);
         materialCardView = findViewById(R.id.dealInfoCard);
+        uname = findViewById(R.id.uname);
+        uemail = findViewById(R.id.uemail);
+        uphone = findViewById(R.id.uphone);
+        cname = findViewById(R.id.cname);
+        cemail = findViewById(R.id.cemail);
+        cphone = findViewById(R.id.cphone);
+        owner = findViewById(R.id.ownerinfo);
+        customer = findViewById(R.id.customerinfo);
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -74,6 +84,53 @@ public class AdminBookingActivity extends AppCompatActivity {
         dealData = (DealData) getIntent().getParcelableExtra("dealData");
         reference = firebaseDatabase.getReference("Token/"+dealData.getUserID());
         databaseReference = firebaseDatabase.getReference("Deals");
+        ownerRef = firebaseDatabase.getReference("User/"+dealData.getUserID());
+        propertyRef = firebaseDatabase.getReference("Property/"+dealData.getPropertyID()+"/userID");
+
+        ownerRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue()!=null){
+                    uname.setText(snapshot.child("fname").getValue().toString());
+                    uemail.setText(snapshot.child("email").getValue().toString());
+                    uphone.setText(snapshot.child("phone").getValue().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                owner.setVisibility(View.GONE);
+            }
+        });
+
+        propertyRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue()!=null){
+                    customerRef = firebaseDatabase.getReference("User/"+snapshot.getValue());
+                    customerRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.getValue()!=null){
+                                cname.setText(snapshot.child("fname").getValue().toString());
+                                cemail.setText(snapshot.child("email").getValue().toString());
+                                cphone.setText(snapshot.child("phone").getValue().toString());
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            customer.setVisibility(View.GONE);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                customer.setVisibility(View.GONE);
+            }
+        });
 
         ptxt.setText(dealData.getPropertyName().toString());
         ploc.setText(dealData.getPropertyAddress().toString());

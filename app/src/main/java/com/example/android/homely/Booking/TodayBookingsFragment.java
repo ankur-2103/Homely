@@ -72,8 +72,8 @@ public class TodayBookingsFragment extends Fragment {
                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                        if(!dealIdArrayList.contains(dataSnapshot.getKey())){
                            try {
-                               calendar2.setTime(simpleDateFormat.parse(dataSnapshot.child("tourDate").getValue().toString()+" "+dataSnapshot.child("tourTime").getValue().toString()));
-                               if(calendar.compareTo(calendar2) == -1 && dateformat.format(calendar.getTime()).equals(dataSnapshot.child("tourDate").getValue().toString())){
+                               calendar2.setTime(simpleDateFormat.parse(dataSnapshot.child("dealDate").getValue().toString()+" "+dataSnapshot.child("dealTime").getValue().toString()));
+                               if(calendar.compareTo(calendar2) == -1 && dateformat.format(calendar.getTime()).equals(dataSnapshot.child("dealDate").getValue().toString())){
                                    dealIdArrayList.add(dataSnapshot.getKey());
                                    dealDataArrayList.add(dataSnapshot.getValue(DealData.class));
                                }
@@ -82,7 +82,7 @@ public class TodayBookingsFragment extends Fragment {
                            }
                        } else{
                            try {
-                               calendar2.setTime(simpleDateFormat.parse(dataSnapshot.child("tourDate").getValue().toString()+" "+dataSnapshot.child("tourTime").getValue().toString()));
+                               calendar2.setTime(simpleDateFormat.parse(dataSnapshot.child("dealDate").getValue().toString()+" "+dataSnapshot.child("dealTime").getValue().toString()));
                                if(calendar.compareTo(calendar2) == 1){
                                    int pos = dealIdArrayList.indexOf(dataSnapshot.getKey());
                                    dealIdArrayList.remove(pos);

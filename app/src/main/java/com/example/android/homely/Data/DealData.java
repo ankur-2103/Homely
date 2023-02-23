@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class DealData implements Parcelable {
+    public String amount;
     public String dealDate;
     public String dealTime;
     public String userID;
@@ -36,7 +37,6 @@ public class DealData implements Parcelable {
         this.amount = amount;
     }
 
-    public String amount;
 
     public String getDealID() {
         return dealID;
