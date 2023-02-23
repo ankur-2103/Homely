@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.homely.Data.DealData;
 import com.example.android.homely.R;
 import com.example.android.homely.Data.PropertyData;
 import com.google.android.material.button.MaterialButton;
@@ -29,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MyHomeFragment extends Fragment {
 
@@ -72,15 +74,7 @@ public class MyHomeFragment extends Fragment {
         list = new ArrayList<>();
         propIDList = new ArrayList<>();
         currPropIDList = new ArrayList<>();
-        myPropertyAdapter = new MyPropertyAdapter(getContext(), list, new MyPropertyAdapter.ItemClickListener() {
-            @Override
-            public void onItemClick(PropertyData propertyData, int pos) {
-                Intent property = new Intent(getContext(), PropertyActivity.class);
-                property.putExtra("propertyData", propertyData);
-                property.putExtra("propertyID", currPropIDList.get(pos));
-                startActivity(property);
-            }
-        });
+        myPropertyAdapter = new MyPropertyAdapter(getContext(), list);
         recyclerView.setAdapter(myPropertyAdapter);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -103,6 +97,7 @@ public class MyHomeFragment extends Fragment {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         propIDList.add(dataSnapshot.getValue().toString());
                     }
+                    getProperties();
                 }
             }
 
@@ -112,27 +107,6 @@ public class MyHomeFragment extends Fragment {
                 imageView.setVisibility(View.VISIBLE);
                 addProperty_button.setVisibility(View.VISIBLE);
                 floating_button.setVisibility(View.GONE);
-            }
-        });
-
-        propertyFirebaseDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
-                currPropIDList.clear();
-                for(String id : propIDList){
-                    if(!currPropIDList.contains(id)){
-                        PropertyData propertyData = snapshot.child(id).getValue(PropertyData.class);
-                        list.add(propertyData);
-                        currPropIDList.add(id);
-                    }
-                }
-                myPropertyAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("dberr", error.toString());
             }
         });
 
@@ -151,5 +125,29 @@ public class MyHomeFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void getProperties() {
+        propertyFirebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue()!=null){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        if(propIDList.contains(dataSnapshot.getKey())){
+                            list.add(dataSnapshot.getValue(PropertyData.class));
+                            currPropIDList.add(dataSnapshot.getKey());
+                            Log.d("bk123", "onDataChange: "+dataSnapshot.getValue());
+                        }
+                    }
+                    Collections.reverse(list);
+                    myPropertyAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

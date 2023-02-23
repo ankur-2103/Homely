@@ -2,6 +2,7 @@ package com.example.android.homely.MyHome;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.homely.R;
 import com.example.android.homely.Data.PropertyData;
+import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -23,12 +25,10 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.My
 
     private Context context;
     private ArrayList<PropertyData>list;
-    private ItemClickListener itemClickListener;
 
-    public MyPropertyAdapter(Context context, ArrayList<PropertyData> list, ItemClickListener itemClickListener) {
+    public MyPropertyAdapter(Context context, ArrayList<PropertyData> list) {
         this.context = context;
         this.list = list;
-        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -54,10 +54,12 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.My
             Log.e("pic", "onBindViewHolder: "+e.toString());
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemClickListener.onItemClick(list.get(position), position);
+                Intent intent = new Intent(context, PropertyActivity.class);
+                intent.putExtra("propertyData", propertyData);
+                context.startActivity(intent);
             }
         });
     }
@@ -67,13 +69,10 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.My
         return list.size();
     }
 
-    public interface ItemClickListener{
-        void onItemClick(PropertyData propertyData, int position);
-    }
-
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView bname, bath, bed, area, price;
         ImageView imageView;
+        MaterialCardView cardView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
@@ -82,6 +81,7 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.My
             bath = itemView.findViewById(R.id.bath);
             area = itemView.findViewById(R.id.area);
             price = itemView.findViewById(R.id.price);
+            cardView = itemView.findViewById(R.id.myPropertyInfo);
         }
     }
 }
