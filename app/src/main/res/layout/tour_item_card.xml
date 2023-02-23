@@ -89,12 +89,16 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/guidDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/guidDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                android:visibility="gone">
             <TextView
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
@@ -160,7 +164,12 @@
                     android:textColor="@color/black"
                     android:textSize="15dp"/>
             </LinearLayout>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
             <LinearLayout
                 android:id="@+id/description1"
                 android:layout_width="match_parent"
@@ -182,6 +191,26 @@
                     android:text="Pending"
                     android:textColor="@color/black"
                     android:textSize="15dp"/>
+            </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cancelTour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    app:cornerRadius="15dp"
+                    style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#F44336"
+                    android:text="Cancel Booking"
+                    android:textAllCaps="false"
+                    android:textSize="15dp"
+                    android:textColor="#F44336"
+                    android:visibility="gone"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

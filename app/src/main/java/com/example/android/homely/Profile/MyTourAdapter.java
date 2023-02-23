@@ -17,6 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.homely.Data.PropertyData;
 import com.example.android.homely.Data.TourData;
 import com.example.android.homely.R;
+import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -25,11 +33,16 @@ public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourView
     private Context context;
     private ArrayList<TourData> list;
     private ArrayList<TourData>listAll;
+    private DatabaseReference user, tours;
+    private FirebaseUser firebaseUser;
 
     public MyTourAdapter(Context context, ArrayList<TourData> list) {
         this.context = context;
         this.list = list;
         this.listAll = list;
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseDatabase.getInstance().getReference("User/"+firebaseUser.getUid()+"/my_tour");
+        tours = FirebaseDatabase.getInstance().getReference("Tour");
     }
 
     @NonNull
@@ -64,14 +77,40 @@ public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourView
                     }
                 }else if(tourData.getStatus().equals("Rejected") && holder.description.getVisibility()==View.GONE && !tourData.getDescription().equals("null")){
                     holder.description.setVisibility(View.VISIBLE);
-                }else {
+                }else if(tourData.getStatus().equals("Pending") && holder.cancelTour.getVisibility()==View.GONE) {
+                    holder.cancelTour.setVisibility(View.VISIBLE);
+                }else{
                     holder.guide.setVisibility(View.GONE);
                     holder.description.setVisibility(View.GONE);
+                    holder.cancelTour.setVisibility(View.GONE);
                 }
+            }
+        });
 
-                    Log.d("myt123", "onBindViewHolder: "+tourData.getStatus());
-                if (tourData.getStatus().equals("Rejected")){
-                }
+        holder.cancelTour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.cancelTour.setVisibility(View.GONE);
+                list.remove(holder.getAdapterPosition());
+                tours.child(tourData.getTourID()).removeValue();
+                user.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.getValue()!=null){
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                if(dataSnapshot.getValue().equals(tourData.getTourID())){
+                                    user.child(dataSnapshot.getKey()).removeValue();
+                                    notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
     }
@@ -116,6 +155,7 @@ public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourView
     public class MyTourViewHolder extends RecyclerView.ViewHolder {
         TextView tbname, tdate, ttime, tstatus, gname, gphone, gemail, desc;
         LinearLayout guide, description, card;
+        MaterialButton cancelTour;
         public MyTourViewHolder(@NonNull View itemView) {
             super(itemView);
             tbname = itemView.findViewById(R.id.tbname);
@@ -129,6 +169,7 @@ public class MyTourAdapter extends RecyclerView.Adapter<MyTourAdapter.MyTourView
             guide = itemView.findViewById(R.id.guidDetails);
             description = itemView.findViewById(R.id.description1);
             card = itemView.findViewById(R.id.tourCard);
+            cancelTour = itemView.findViewById(R.id.cancelTour);
         }
     }
 }

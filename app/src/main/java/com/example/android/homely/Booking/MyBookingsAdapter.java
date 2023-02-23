@@ -72,6 +72,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
         holder.cancelDeal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                holder.cancelDeal.setVisibility(View.GONE);
                 list.remove(holder.getAdapterPosition());
                 deals.child(dealData.getDealID()).removeValue();
                 user.addListenerForSingleValueEvent(new ValueEventListener() {

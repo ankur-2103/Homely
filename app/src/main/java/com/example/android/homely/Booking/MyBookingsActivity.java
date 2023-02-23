@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MyBookingsActivity extends AppCompatActivity {
 
@@ -123,6 +124,7 @@ public class MyBookingsActivity extends AppCompatActivity {
                             Log.d("bk123", "onDataChange: "+dataSnapshot.getValue());
                         }
                     }
+                    Collections.reverse(dealDataList);
                     myBookingsAdapter.notifyDataSetChanged();
                 }
             }
