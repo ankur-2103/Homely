@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.android.homely.Booking.MyBookingsActivity;
 import com.example.android.homely.MainActivity;
 import com.example.android.homely.Profile.MyTourActivity;
 import com.example.android.homely.R;
@@ -34,6 +35,25 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         message = remoteMessage.getData().get("Message");
         id = getID();
         uid = new Random().nextInt();
+        Intent myTour = new Intent(getApplicationContext(), MyTourActivity.class);
+        Intent myBooking = new Intent(getApplicationContext(), MyBookingsActivity.class);
+        Intent admin = new Intent(getApplicationContext(), MainActivity.class);
+
+        myTour.addCategory(Intent. CATEGORY_LAUNCHER ) ;
+        myTour.setAction(Intent. ACTION_MAIN ) ;
+        myTour.setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP | Intent. FLAG_ACTIVITY_SINGLE_TOP ) ;
+
+        myBooking.addCategory(Intent. CATEGORY_LAUNCHER ) ;
+        myBooking.setAction(Intent. ACTION_MAIN ) ;
+        myBooking.setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP | Intent. FLAG_ACTIVITY_SINGLE_TOP ) ;
+
+        admin.addCategory(Intent. CATEGORY_LAUNCHER ) ;
+        admin.setAction(Intent. ACTION_MAIN ) ;
+        admin.setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP | Intent. FLAG_ACTIVITY_SINGLE_TOP ) ;
+
+        PendingIntent myTourP = PendingIntent.getActivity(getApplicationContext(), 0, myTour, 0);
+        PendingIntent myBookingP = PendingIntent.getActivity(getApplicationContext(), 0, myBooking, 0);
+        PendingIntent adminP = PendingIntent.getActivity(getApplicationContext(), 0, admin, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), id)
                 .setSmallIcon(R.drawable.ic_outline_notifications_24)
@@ -41,6 +61,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentText(message)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        if (title.equals("New Deal")){
+            builder.setContentIntent(adminP);
+        }else if(title.equals("New Tour")){
+            builder.setContentIntent(adminP);
+        }else if (title.equals("Deal")){
+            builder.setContentIntent(myBookingP);
+        }else if(title.equals("Tour")){
+            builder.setContentIntent(myTourP);
+        }
 
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
