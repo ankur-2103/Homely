@@ -22,7 +22,6 @@
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -60,17 +59,14 @@
         android:layout_marginRight="24dp"
         android:hint="Full Name"
         app:layout_constraintTop_toBottomOf="@+id/profileImg"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="34dp">
+        tools:ignore="MissingConstraints">
 
         <EditText
             android:id="@+id/Nfname"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="124dp" />
+            tools:ignore="MissingConstraints" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,17 +80,14 @@
         android:layout_marginRight="24dp"
         android:hint="Email"
         app:layout_constraintTop_toBottomOf="@+id/textlayout1"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="34dp">
+        tools:ignore="MissingConstraints">
 
         <EditText
             android:id="@+id/Nemail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textEmailAddress"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="124dp" />
+            tools:ignore="MissingConstraints"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,17 +101,14 @@
         android:layout_marginRight="24dp"
         android:hint="Phone Number"
         app:layout_constraintTop_toBottomOf="@+id/textlayout2"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="34dp">
+        tools:ignore="MissingConstraints">
 
         <EditText
             android:id="@+id/Nphone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="phone"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="124dp" />
+            tools:ignore="MissingConstraints"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

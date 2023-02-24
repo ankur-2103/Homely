@@ -41,17 +41,14 @@
         android:layout_marginRight="24dp"
         android:hint="E-mail"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="34dp">
+        tools:ignore="MissingConstraints">
 
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textEmailAddress"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="124dp" />
+            tools:ignore="MissingConstraints" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,17 +62,14 @@
         android:layout_marginRight="24dp"
         android:hint="Password"
         app:layout_constraintTop_toBottomOf="@+id/textlayout1"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="34dp">
+        tools:ignore="MissingConstraints">
 
         <EditText
             android:id="@+id/pass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="124dp" />
+            tools:ignore="MissingConstraints"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,7 +107,6 @@
         android:text="Don't have account? "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/signup"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -126,7 +119,6 @@
         android:textColor="@color/light_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/createaccount" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

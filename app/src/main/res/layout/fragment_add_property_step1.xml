@@ -40,8 +40,7 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopStart="10dp"
             app:layout_constraintTop_toBottomOf="@id/textView"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="34dp">
+            tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/building_name"
@@ -68,8 +67,7 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopStart="10dp"
             app:layout_constraintTop_toBottomOf="@id/textlayout1"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="34dp">
+            tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/street_address"
@@ -96,8 +94,7 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopStart="10dp"
             app:layout_constraintTop_toBottomOf="@id/textlayout2"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="34dp">
+            tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/city_name"
@@ -124,8 +121,7 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopStart="10dp"
             app:layout_constraintTop_toBottomOf="@id/textlayout3"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="34dp">
+            tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/state"
@@ -152,8 +148,7 @@
             app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopStart="10dp"
             app:layout_constraintTop_toBottomOf="@id/textlayout4"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="34dp">
+            tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pincode"
