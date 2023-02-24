@@ -74,31 +74,28 @@ public class AcceptTourFragment extends Fragment {
         databaseReference.orderByChild("status").equalTo("Pending").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("data", "onDataChange: "+snapshot);
                 if (snapshot.getValue() != null){
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         if(!tourIdArrayList.contains(dataSnapshot.getKey())){
                             try {
                                 calendar2.setTime(simpleDateFormat.parse(dataSnapshot.child("tourDate").getValue().toString()+" "+dataSnapshot.child("tourTime").getValue().toString()));
                                 if(calendar.compareTo(calendar2) == -1){
-                                    Log.d("dateTime", "onDataChange: smaller");
                                     tourIdArrayList.add(dataSnapshot.getKey());
                                     tourDataArrayList.add(dataSnapshot.getValue(TourData.class));
                                 }
                             } catch (Exception e) {
-                                Log.d("dateTimeE", "onDataChange: "+e);
+                                Log.e("err", "Error : "+e);
                             }
                         } else{
                             try {
                                 calendar2.setTime(simpleDateFormat.parse(dataSnapshot.child("tourDate").getValue().toString()+" "+dataSnapshot.child("tourTime").getValue().toString()));
                                 if(calendar.compareTo(calendar2) == 1){
-                                    Log.d("dateTime", "onDataChange: greater");
                                     int pos = tourIdArrayList.indexOf(dataSnapshot.getKey());
                                     tourIdArrayList.remove(pos);
                                     tourDataArrayList.remove(pos);
                                 }
                             } catch (Exception e) {
-                                Log.d("dateTimeE", "onDataChange: "+e);
+                                Log.e("err", "Error : "+e);
                             }
                         }
                     }

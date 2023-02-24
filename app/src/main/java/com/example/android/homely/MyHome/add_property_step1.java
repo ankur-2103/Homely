@@ -45,7 +45,6 @@ public class add_property_step1 extends Fragment {
 
         try {
             propertyData = getArguments().getParcelable("propertyData");
-            Log.d("editProp", String.valueOf(propertyData));
             if(propertyData!=null){
                 bname.setText(propertyData.getBuilding_name());
                 saddress.setText(propertyData.getStreet_address());
@@ -53,10 +52,9 @@ public class add_property_step1 extends Fragment {
                 tstate.setText(propertyData.getState());
                 tpincode.setText(propertyData.getPincode());
             }else{
-                Log.d("editProp", "no data");
             }
         }catch (Exception e){
-            Log.d("editProp", e.toString());
+            Log.e("err", "Error : "+e);
         }
 
         return view;

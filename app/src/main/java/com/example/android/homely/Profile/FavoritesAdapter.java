@@ -51,7 +51,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         try {
             Picasso.get().load(uri).into(holder.imageView);
         }catch (Exception e){
-            Log.e("pic", "onBindViewHolder: "+e.toString());
+            Log.e("err", "Error : "+e);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

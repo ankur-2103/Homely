@@ -71,7 +71,7 @@ public class ChangePassword extends AppCompatActivity {
                         throw task.getException();
                     }catch (Exception e){
                         Toast.makeText(ChangePassword.this, e.toString(), Toast.LENGTH_SHORT).show();
-                        Log.e("CPass", e.toString());
+                        Log.e("err", e.toString());
                     }
                 }
             }

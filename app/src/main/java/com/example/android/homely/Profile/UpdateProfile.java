@@ -156,6 +156,7 @@ public class UpdateProfile extends AppCompatActivity {
                 Log.d("up123", "onActivityResult: "+filePath);
             }
             catch (Exception e) {
+                Log.e("err", "Error : "+e);
             }
         }
     }
@@ -185,7 +186,6 @@ public class UpdateProfile extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if (!task.isSuccessful()){
                     success = false;
-                    Log.d("email", "onComplete: "+task.getException());
                     Toast.makeText(UpdateProfile.this, "Email Update Failed!!!", Toast.LENGTH_SHORT).show();
                 }else{
                     databaseReference.child("email").setValue(email);

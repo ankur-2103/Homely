@@ -106,16 +106,11 @@ public class HomeFragment extends Fragment {
         propertyFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Log.d("home123", "onDataChange: "+snapshot.getValue());
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Log.d("home12345", "onDataChange: "+!user.getUid().equals(dataSnapshot.child("userID").getValue().toString()));
-                    Log.d("home1234", "onDataChange: "+!currPropIDList.contains(dataSnapshot.getKey()));
                     if(!user.getUid().equals(dataSnapshot.child("userID").getValue().toString()) && !currPropIDList.contains(dataSnapshot.getKey())){
                         PropertyData propertyData = dataSnapshot.getValue(PropertyData.class);
-                        Log.d("home123", "onDataChange: "+!user.getUid().equals(dataSnapshot.child("userID").getValue().toString()));
                         propertyDataList.add(dataSnapshot.getValue(PropertyData.class));
                         currPropIDList.add(dataSnapshot.getKey());
-
                     }
                 }
                 homeAdapter.notifyDataSetChanged();

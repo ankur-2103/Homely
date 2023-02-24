@@ -197,7 +197,7 @@ public class PropertyProfile extends AppCompatActivity {
         try {
             Picasso.get().load(uri).into(imageView);
         }catch (Exception e){
-            Log.w("pice", "onCreate: "+e.toString() );
+            Log.e("err", "Error : "+e);
         }
 
         tour.setOnClickListener(new View.OnClickListener() {

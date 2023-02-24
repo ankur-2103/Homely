@@ -101,7 +101,7 @@ public class add_property_step2 extends Fragment  {
                 radioButton2.setChecked(true);
             }
         }catch (Exception e){
-            Log.w("propType", e.toString());
+            Log.e("err", "Error : "+e);
         }
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

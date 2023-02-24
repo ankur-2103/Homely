@@ -80,7 +80,6 @@ public class MyHomeFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.w("DBsnap", "onDataChange: "+snapshot.toString());
                 if(snapshot.getValue()==null){
                     imageView.setVisibility(View.VISIBLE);
                     addProperty_button.setVisibility(View.VISIBLE);
@@ -103,7 +102,6 @@ public class MyHomeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("dberr", error.toString());
                 imageView.setVisibility(View.VISIBLE);
                 addProperty_button.setVisibility(View.VISIBLE);
                 floating_button.setVisibility(View.GONE);
@@ -136,7 +134,6 @@ public class MyHomeFragment extends Fragment {
                         if(propIDList.contains(dataSnapshot.getKey())){
                             list.add(dataSnapshot.getValue(PropertyData.class));
                             currPropIDList.add(dataSnapshot.getKey());
-                            Log.d("bk123", "onDataChange: "+dataSnapshot.getValue());
                         }
                     }
                     Collections.reverse(list);

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,8 +57,9 @@ public class add_property_step4 extends Fragment {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
+                Log.e("err", "Error : "+e);
             }
         }
 
@@ -73,7 +75,7 @@ public class add_property_step4 extends Fragment {
             propertyData = getArguments().getParcelable("propertyData");
             Picasso.get().load(propertyData.getFuri()).into(imageView);
         }catch (Exception e){
-
+            Log.e("err", "Error : "+e);
         }
 
         return view;
@@ -96,8 +98,9 @@ public class add_property_step4 extends Fragment {
             try{
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
-            }catch (IOException e) {
+            }catch (Exception e) {
                 e.printStackTrace();
+                Log.e("err", "Error : "+e);
             }
         }
     }

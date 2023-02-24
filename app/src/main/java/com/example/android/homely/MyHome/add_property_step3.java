@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,7 @@ public class add_property_step3 extends Fragment {
                 desc.setText(propertyData.getDescription());
             }
         }catch (Exception e){
-
+            Log.e("err", "Error : "+e);
         }
 
         return view;

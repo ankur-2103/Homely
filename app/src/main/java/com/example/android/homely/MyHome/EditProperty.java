@@ -10,6 +10,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -164,9 +165,8 @@ public class EditProperty extends AppCompatActivity implements PassDataInterface
                 propertyData.lang = String.valueOf(addressList.get(0).getLongitude());
             }
         }catch (Exception e){
-
+            Log.e("err", "Error : "+e);
         }
-//        Toast.makeText(this, building_name+" "+streetaddress+" "+city_name+" "+state+" "+pincode, Toast.LENGTH_SHORT).show();
         next();
     }
 
@@ -187,7 +187,6 @@ public class EditProperty extends AppCompatActivity implements PassDataInterface
     @Override
     public void onDataReceivedStep3(String desc) {
         propertyData.description = desc;
-        Toast.makeText(this, description, Toast.LENGTH_SHORT).show();
         next();
     }
 
@@ -196,7 +195,6 @@ public class EditProperty extends AppCompatActivity implements PassDataInterface
         if(uri != null){
             this.uri = uri;
         }
-//        Toast.makeText(this, uri.toString(), Toast.LENGTH_SHORT).show();
         submit();
     }
 
@@ -219,7 +217,7 @@ public class EditProperty extends AppCompatActivity implements PassDataInterface
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(EditProperty.this, "Profile Image Upload Failed!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditProperty.this, "Property Image Upload Failed!!!", Toast.LENGTH_SHORT).show();
                 }
             });
         }

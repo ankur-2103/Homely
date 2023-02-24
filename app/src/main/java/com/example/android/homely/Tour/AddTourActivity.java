@@ -105,7 +105,6 @@ public class AddTourActivity extends AppCompatActivity implements PassDataInterf
         if (tourType.equals("Virtual")){
             tourData.virtualType = "null";
         }
-        Toast.makeText(this, tourType+" "+tourDate+" "+tourTime, Toast.LENGTH_SHORT).show();
         i = tourType.equals("Virtual") ? 2 : 3;
         loadFragment();
     }
@@ -176,14 +175,12 @@ public class AddTourActivity extends AppCompatActivity implements PassDataInterf
         apiService.sendNotification(notificationSender).enqueue(new Callback<MyResponse>() {
             @Override
             public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
-                Log.d("respo", "onResponse: "+response.body().success);
                 if(response.code()==200 && response.body().success!=1){
                 }
             }
 
             @Override
             public void onFailure(Call<MyResponse> call, Throwable t) {
-                Log.d("gfg1", "onFailure: "+t);
                 Toast.makeText(AddTourActivity.this, "Tour Requested Failed!!", Toast.LENGTH_SHORT).show();
             }
         });

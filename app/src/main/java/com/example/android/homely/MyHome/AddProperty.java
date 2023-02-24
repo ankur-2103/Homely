@@ -155,12 +155,10 @@ public class AddProperty extends AppCompatActivity implements PassDataInterface 
             if (addressList != null){
                 this.lat = String.valueOf(addressList.get(0).getLatitude());
                 this.lang = String.valueOf(addressList.get(0).getLongitude());
-//                Toast.makeText(this, lat+" "+lang, Toast.LENGTH_LONG).show();
             }
         }catch (Exception e){
-
+            Log.e("err", "Error : "+e);
         }
-//        Toast.makeText(this, building_name+" "+streetaddress+" "+city_name+" "+state+" "+pincode, Toast.LENGTH_SHORT).show();
         next();
     }
 
@@ -175,21 +173,18 @@ public class AddProperty extends AppCompatActivity implements PassDataInterface 
         this.bathrooms = bathroom;
         this.deposit = deposit;
         this.monthly_rent = monthly_rent;
-        Toast.makeText(this, property+" "+property_type+" "+area_width+" "+area_length+" "+year_built+" "+bedroom+" "+bathroom+" "+deposit+" "+monthly_rent, Toast.LENGTH_SHORT).show();
         next();
     }
 
     @Override
     public void onDataReceivedStep3(String desc) {
         this.description = desc;
-        Toast.makeText(this, description, Toast.LENGTH_SHORT).show();
         next();
     }
 
     @Override
     public void onDataReceivedStep4(Uri uri) {
         this.uri = uri;
-        Toast.makeText(this, uri.toString(), Toast.LENGTH_SHORT).show();
         submit();
     }
 
@@ -216,15 +211,14 @@ public class AddProperty extends AppCompatActivity implements PassDataInterface 
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AddProperty.this, "Profile Image Upload Failed!!!", Toast.LENGTH_SHORT).show();
-                    Log.e("Fileup", e.toString());
+                    Toast.makeText(AddProperty.this, "Property Image Upload Failed!!!", Toast.LENGTH_SHORT).show();
                 }
             });
         }
 
 
         }catch (Exception e){
-            Log.e("PE", e.toString());
+            Log.e("err", "Error : "+e);
         }
         finish();
     }

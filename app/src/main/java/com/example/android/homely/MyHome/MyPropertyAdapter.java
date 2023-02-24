@@ -51,7 +51,7 @@ public class MyPropertyAdapter extends RecyclerView.Adapter<MyPropertyAdapter.My
         try {
             Picasso.get().load(uri).into(holder.imageView);
         }catch (Exception e){
-            Log.e("pic", "onBindViewHolder: "+e.toString());
+            Log.e("err", "Error : "+e);
         }
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {

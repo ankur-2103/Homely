@@ -84,24 +84,22 @@ public class TodayTourFragment extends Fragment {
                             try {
                                 calendar2.setTime(simpleDateFormat.parse(dataSnapshot.child("tourDate").getValue().toString()+" "+dataSnapshot.child("tourTime").getValue().toString()));
                                 if(calendar.compareTo(calendar2) == -1 && dateformat.format(calendar.getTime()).equals(dataSnapshot.child("tourDate").getValue().toString())){
-                                    Log.d("dateTime", "onDataChange: smaller");
                                     tourIdArrayList.add(dataSnapshot.getKey());
                                     tourDataArrayList.add(dataSnapshot.getValue(TourData.class));
                                 }
                             } catch (Exception e) {
-                                Log.d("dateTimeE", "onDataChange: "+e);
+                                Log.e("err", "Error : "+e);
                             }
                         } else{
                             try {
                                 calendar2.setTime(simpleDateFormat.parse(dataSnapshot.child("tourDate").getValue().toString()+" "+dataSnapshot.child("tourTime").getValue().toString()));
                                 if(calendar.compareTo(calendar2) == 1){
-                                    Log.d("dateTime", "onDataChange: greater");
                                     int pos = tourIdArrayList.indexOf(dataSnapshot.getKey());
                                     tourIdArrayList.remove(pos);
                                     tourDataArrayList.remove(pos);
                                 }
                             } catch (Exception e) {
-                                Log.d("dateTimeE", "onDataChange: "+e);
+                                Log.e("err", "Error : "+e);
                             }
                         }
                     }

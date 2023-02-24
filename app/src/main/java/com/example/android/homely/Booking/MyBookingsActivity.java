@@ -121,7 +121,6 @@ public class MyBookingsActivity extends AppCompatActivity {
                         if(dealIDList.contains(dataSnapshot.getKey())){
                             dealDataList.add(dataSnapshot.getValue(DealData.class));
                             currDealIDList.add(dataSnapshot.getKey());
-                            Log.d("bk123", "onDataChange: "+dataSnapshot.getValue());
                         }
                     }
                     Collections.reverse(dealDataList);

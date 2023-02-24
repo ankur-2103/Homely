@@ -189,14 +189,12 @@ public class BookNowActivity extends AppCompatActivity {
         apiService.sendNotification(notificationSender).enqueue(new Callback<MyResponse>() {
             @Override
             public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
-                Log.d("respo", "onResponse: "+response.body().success);
                 if(response.code()==200 && response.body().success!=1){
                 }
             }
 
             @Override
             public void onFailure(Call<MyResponse> call, Throwable t) {
-                Log.d("gfg1", "onFailure: "+t);
                 Toast.makeText(BookNowActivity.this, "Deal Request Failed!!", Toast.LENGTH_SHORT).show();
             }
         });

@@ -78,7 +78,7 @@ public class TodayBookingsFragment extends Fragment {
                                    dealDataArrayList.add(dataSnapshot.getValue(DealData.class));
                                }
                            } catch (Exception e) {
-                               Log.d("dateTimeE", "onDataChange: "+e);
+                               Log.e("err", "Error : "+e);
                            }
                        } else{
                            try {
@@ -89,7 +89,7 @@ public class TodayBookingsFragment extends Fragment {
                                    dealDataArrayList.remove(pos);
                                }
                            } catch (Exception e) {
-                               Log.d("dateTimeE", "onDataChange: "+e);
+                               Log.e("err", "Error : "+e);
                            }
                        }
                    }

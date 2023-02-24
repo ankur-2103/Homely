@@ -96,7 +96,6 @@ public class Favorites extends AppCompatActivity {
     }
 
     private void getProperties() {
-        Log.d("fav", "onClick: ");
         propertyFirebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

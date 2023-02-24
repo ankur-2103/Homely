@@ -92,7 +92,7 @@ public class PropertyActivity extends AppCompatActivity {
         try {
             Picasso.get().load(uri).into(imageView);
         }catch (Exception e){
-            Log.w("pice", "onCreate: "+e.toString() );
+            Log.w("Error", "onCreate: "+e.toString() );
         }
 
         edit.setOnClickListener(new View.OnClickListener() {

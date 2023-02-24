@@ -141,7 +141,7 @@ public class SearchActivity extends AppCompatActivity implements PassDataInterfa
                     bundle.putString("propertyType",propertyType);
                     filterDialog.setArguments(bundle);
                 }catch (Exception e){
-                    Log.w("filerDialog", e.toString());
+                    Log.e("err", "Error : "+e);
                 }
                 filterDialog.show(getFragmentManager(),"filterDialog");
             }

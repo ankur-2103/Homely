@@ -29,6 +29,5 @@ public class TourActivity extends AppCompatActivity {
 
         viewPager.setAdapter(tourAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        Log.d("tc123", "onCreate: ");
     }
 }

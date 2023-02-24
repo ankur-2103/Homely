@@ -72,7 +72,7 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMarkerClickLis
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
                 }catch (Exception e){
-
+                    Log.e("err", "Error : "+e);
                 }
             }
             if(!list.isEmpty()){
@@ -81,7 +81,7 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMarkerClickLis
                         latLng = new LatLng(Double.parseDouble(arrayMap.getValue().getLat()), Double.parseDouble(arrayMap.getValue().getLang()));
                         googleMap.addMarker(new MarkerOptions().position(latLng).title(arrayMap.getValue().getBuilding_name())).setTag(arrayMap.getKey());
                     }catch (Exception e){
-
+                        Log.e("err", "Error : "+e);
                     }
                 }
             }
@@ -115,7 +115,7 @@ public class MapsFragment extends Fragment implements GoogleMap.OnMarkerClickLis
         try {
             Picasso.get().load(uri).into(imageView);
         }catch (Exception e){
-            Log.e("pic", "onBindViewHolder: "+e.toString());
+            Log.e("err", "Error : "+e);
         }
 
         cardView.setOnClickListener(new View.OnClickListener() {
