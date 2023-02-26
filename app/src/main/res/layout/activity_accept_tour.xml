@@ -226,7 +226,7 @@
             android:id="@+id/agentEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:selectAllOnFocus="true"
             android:autofillHints="postalAddress"/>
 
@@ -253,7 +253,7 @@
             android:id="@+id/agentPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text"
+            android:inputType="phone"
             android:selectAllOnFocus="true"
             android:autofillHints="postalAddress"/>
 
